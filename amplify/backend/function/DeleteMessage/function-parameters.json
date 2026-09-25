@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "api": {
+      "whiskeysocial": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "storage": {
+      "Conversation:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "ConversationParticipant:@model(appsync)": [
+        "read"
+      ],
+      "Message:@model(appsync)": [
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

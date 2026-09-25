@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "whiskeysocial",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authwhiskeysocial1f41304e",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2024-07-24T20:12:25.879Z"
+}

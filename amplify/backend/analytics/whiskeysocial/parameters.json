@@ -1,0 +1,21 @@
+{
+    "appName": "whiskeysocial",
+    "roleName": "pinpointLambdaRole744fbe27",
+    "cloudformationPolicyName": "cloudformationPolicy744fbe27",
+    "cloudWatchPolicyName": "cloudWatchPolicy744fbe27",
+    "pinpointPolicyName": "pinpointPolicy744fbe27",
+    "authPolicyName": "pinpoint_amplify_744fbe27",
+    "unauthPolicyName": "pinpoint_amplify_744fbe27",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

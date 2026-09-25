@@ -1,0 +1,13 @@
+{
+  "name": "deleteclubpostsadmin",
+  "version": "1.0.0",
+  "description": "Lambda function for club admins to delete posts in their club",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "aws-sdk": "^2.1691.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.92"
+  }
+}

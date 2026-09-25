@@ -1,0 +1,14 @@
+appId: app.whiskeysocial
+---
+# - runFlow: 'my_email.yaml'
+- runFlow:
+    when:
+      visible: 'Organize your collection'
+    commands:
+      - runFlow: 'carroucel.yaml'
+- runFlow: 'login_google.yaml'
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../onboarding_domain/main.yaml'

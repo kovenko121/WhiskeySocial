@@ -1,0 +1,46 @@
+[
+  {
+    "Action": [
+      "dynamodb:PutItem",
+      "dynamodb:GetItem",
+      "dynamodb:Scan",
+      "dynamodb:Query"
+    ],
+    "Resource": [
+      "arn:aws:dynamodb:*:*:table/CMSUser-*",
+      "arn:aws:dynamodb:*:*:table/CMSUserBrand-*",
+      "arn:aws:dynamodb:*:*:table/User-*"
+    ]
+  },
+  {
+    "Action": [
+      "cognito-idp:AdminCreateUser",
+      "cognito-idp:AdminGetUser",
+      "cognito-idp:AdminSetUserPassword",
+      "cognito-idp:AdminInitiateAuth",
+      "cognito-idp:AdminUpdateUserAttributes",
+      "cognito-idp:AdminResetUserPassword",
+      "cognito-idp:AdminAddUserToGroup",
+      "cognito-idp:AdminListGroupsForUser"
+    ],
+    "Resource": [
+      "arn:aws:cognito-idp:*:*:userpool/*"
+    ]
+  },
+  {
+    "Action": [
+      "lambda:InvokeFunction"
+    ],
+    "Resource": [
+      "arn:aws:lambda:*:*:function:SendCMSUserInvitation-*"
+    ]
+  },
+  {
+    "Action": [
+      "ssm:GetParameter"
+    ],
+    "Resource": [
+      "arn:aws:ssm:*:*:parameter/amplify/*"
+    ]
+  }
+]

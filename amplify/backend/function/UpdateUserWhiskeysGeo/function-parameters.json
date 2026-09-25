@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "storage": {
+      "UserWhiskeys:@model(appsync)": [
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "storage": {
+      "Event:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

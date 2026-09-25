@@ -1,0 +1,28 @@
+appId: app.whiskeysocial
+---
+- runFlow: 'activity.yaml'
+- runFlow: '../rewards_domain/rewards_empty.yaml'
+- runFlow: '../notifications_domain/notifications.yaml'
+- runFlow: 'settings.yaml'
+- runFlow: 'find_people.yaml'
+- runFlow: '../notifications_domain/notifications_comments_other_user.yaml'
+- runFlow: '../ads_domain/main.yaml'
+
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../settings_domain/main.yaml'
+
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../posts_domain/main.yaml'
+
+- runFlow: 'like_and_comment.yaml'
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../rewards_domain/main.yaml'

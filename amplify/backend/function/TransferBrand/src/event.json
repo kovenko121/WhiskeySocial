@@ -1,0 +1,12 @@
+{
+  "arguments": {
+    "id": "brand-id-here",
+    "email": "newowner@example.com"
+  },
+  "identity": {
+    "username": "admin-user",
+    "claims": {
+      "cognito:groups": ["Admin"]
+    }
+  }
+}

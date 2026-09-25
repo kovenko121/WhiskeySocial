@@ -1,0 +1,33 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/posts_domain/posts_delete-user'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------------------------------
+- scrollUntilVisible:
+    centerElement: true
+    element: "Testando inserção, depois excluindo"
+    direction: DOWN
+- tapOn:
+    id: "options"
+- tapOn: 
+    id: "delete-post"
+#-------------------------------------
+- scrollUntilVisible:
+    centerElement: true
+    element: "Testando inserção textos, pessoas e locais"
+    direction: UP
+- tapOn:
+    id: "options"
+- tapOn: 
+    id: "delete-post"
+#------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

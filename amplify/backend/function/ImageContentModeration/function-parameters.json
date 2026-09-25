@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "api": {
+      "whiskeysocial": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "storage": {
+      "User:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "Post:@model(appsync)": [
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "bucketName",
+      "environmentVariableName": "BUCKET_NAME"
+    }
+  ]
+}

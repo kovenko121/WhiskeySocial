@@ -1,0 +1,102 @@
+[
+  {
+    "Action": [
+      "dynamodb:DescribeTable",
+      "dynamodb:GetItem",
+      "dynamodb:Query",
+      "dynamodb:Scan",
+      "dynamodb:PutItem",
+      "dynamodb:UpdateItem",
+      "dynamodb:DeleteItem",
+      "dynamodb:TransactWriteItems"
+    ],
+    "Resource": [
+      {
+        "Fn::Join": [
+          "",
+          [
+            "arn:aws:dynamodb:",
+            {
+              "Ref": "AWS::Region"
+            },
+            ":",
+            {
+              "Ref": "AWS::AccountId"
+            },
+            ":table/",
+            {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apiwhiskeysocialGraphQLAPIIdOutput}:GetAtt:PostTable:Name"
+              }
+            }
+          ]
+        ]
+      },
+      {
+        "Fn::Join": [
+          "",
+          [
+            "arn:aws:dynamodb:",
+            {
+              "Ref": "AWS::Region"
+            },
+            ":",
+            {
+              "Ref": "AWS::AccountId"
+            },
+            ":table/",
+            {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apiwhiskeysocialGraphQLAPIIdOutput}:GetAtt:UserLikesTable:Name"
+              }
+            }
+          ]
+        ]
+      },
+      {
+        "Fn::Join": [
+          "",
+          [
+            "arn:aws:dynamodb:",
+            {
+              "Ref": "AWS::Region"
+            },
+            ":",
+            {
+              "Ref": "AWS::AccountId"
+            },
+            ":table/",
+            {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apiwhiskeysocialGraphQLAPIIdOutput}:GetAtt:PostTable:Name"
+              }
+            },
+            "/index/*"
+          ]
+        ]
+      },
+      {
+        "Fn::Join": [
+          "",
+          [
+            "arn:aws:dynamodb:",
+            {
+              "Ref": "AWS::Region"
+            },
+            ":",
+            {
+              "Ref": "AWS::AccountId"
+            },
+            ":table/",
+            {
+              "Fn::ImportValue": {
+                "Fn::Sub": "${apiwhiskeysocialGraphQLAPIIdOutput}:GetAtt:UserLikesTable:Name"
+              }
+            },
+            "/index/*"
+          ]
+        ]
+      }
+    ]
+  }
+]

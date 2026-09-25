@@ -1,0 +1,10 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "import/no-relative-packages": "off",
+    "import/no-extraneous-dependencies": "off",
+    "react/no-unstable-nested-components": "off",
+    "prefer-destructuring": "warn",
+    "no-nested-ternary": "warn"
+  }
+}

@@ -1,0 +1,19 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/settings'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- tapOn:
+    id: "settings"
+- assertVisible: "Settings"
+- tapOn:
+    id: "navigation-back"
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

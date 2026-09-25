@@ -1,0 +1,56 @@
+{
+  "Records": [
+      {
+          "eventID": "709381847cd1cf5014e13c340a7ac151",
+          "eventName": "REMOVE",
+          "eventVersion": "1.1",
+          "eventSource": "aws:dynamodb",
+          "awsRegion": "us-east-2",
+          "dynamodb": {
+              "ApproximateCreationDateTime": 1691785378,
+              "Keys": {
+                  "id": {
+                      "S": "7404a0c9-8005-41cb-886e-c0dd8c488dd0"
+                  }
+              },
+              "OldImage": {
+                  "owner": {
+                      "S": "511b3550-8071-70fa-1d2a-4141fe72f3c3::511b3550-8071-70fa-1d2a-4141fe72f3c3"
+                  },
+                  "createdAt": {
+                      "S": "2023-08-11T18:02:50.644Z"
+                  },
+                  "likesCount": {
+                      "N": "0"
+                  },
+                  "references": {
+                      "L": []
+                  },
+                  "__typename": {
+                      "S": "Post"
+                  },
+                  "description": {
+                      "S": "the first post of an age"
+                  },
+                  "id": {
+                      "S": "f093d538-102f-4db1-abb7-573aa7df8b0f"
+                  },
+                  "authorId": {
+                      "S": "511b3550-8071-70fa-1d2a-4141fe72f3c3"
+                  },
+                  "title": {
+                      "S": ""
+                  },
+                  "updatedAt": {
+                      "S": "2023-08-11T18:02:50.644Z"
+                  }
+              },
+              "SequenceNumber": "176572000000000011045869203",
+              "SizeBytes": 343,
+              "StreamViewType": "NEW_AND_OLD_IMAGES"
+          },
+          "eventSourceARN": "arn:aws:dynamodb:us-east-2:130261235091:table/Post-zuz2oevzuzg3llo2wbjre2ovey-dev/stream/2023-07-05T17:08:22.221"
+      }
+  ]
+}
+

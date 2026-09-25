@@ -1,0 +1,6 @@
+appId: app.whiskeysocial
+---
+- runFlow: 'include_my_whiskey-list.yaml'
+- runFlow: 'exclude_my_whiskey-list.yaml'
+- runFlow: '../my_collection_domain/exclude_whiskey_inserted_to_my_wishlist.yaml'
+

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>Welcome to Whiskey Social CMS</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    :root {
+      color-scheme: light dark;
+      supported-color-schemes: light dark;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      .darkmode-bg {
+        background-color: transparent !important;
+      }
+      .darkmode-secondary-bg {
+        background-color: #1a2332 !important;
+      }
+    }
+  </style>
+</head>
+<body class="darkmode-bg" style="margin: 0; padding: 0; background-color: #141c29; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" class="darkmode-bg" style="background-color: #141c29;">
+    <tr>
+      <td align="center" style="padding: 0;">
+        <table role="presentation" cellpadding="0" cellspacing="0" width="600" style="max-width: 600px; width: 100%;">
+          <!-- Header Image -->
+          <tr>
+            <td align="center" style="padding: 40px 20px 30px 20px;">
+              <img src="cid:ws-logo" alt="Whiskey Social" style="display: block; max-width: 100%; height: auto;" width="300">
+            </td>
+          </tr>
+          
+          <!-- Main Content -->
+          <tr>
+            <td align="center" style="padding: 0 40px 40px 40px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td align="center" style="padding: 0 0 30px 0;">
+                    <h1 style="margin: 0; color: #a69e6d; font-size: 24px; line-height: 1.3;">
+                      Welcome to Whiskey Social CMS
+                    </h1>
+                  </td>
+                </tr>
+                
+                <tr>
+                  <td align="center" style="padding: 0 0 20px 0;">
+                    <p style="margin: 0; color: #a69e6d; font-size: 16px; line-height: 1.5;">
+                      You've been invited to join the Whiskey Social Content Management System with the role of <strong>{{role}}</strong>.
+                    </p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td align="center" style="padding: 0 0 30px 0;">
+                    <p style="margin: 0; color: #a69e6d; font-size: 16px; line-height: 1.5;">
+                      Click the button below to accept your invitation and set up your account:
+                    </p>
+                  </td>
+                </tr>
+                
+                <!-- CTA Button -->
+                <tr>
+                  <td align="center" style="padding: 0 0 30px 0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="background-color: #a69e6d; border-radius: 6px;">
+                          <a href="{{invitationUrl}}" style="display: inline-block; padding: 16px 32px; color: #ffffff; text-decoration: none; font-weight: bold; font-size: 16px;">
+                            Accept Invitation
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                
+                <!-- Additional Info -->
+                <tr>
+                  <td align="left" style="padding: 0 0 20px 0;">
+                    <p style="margin: 0; color: #a69e6d; font-size: 14px; line-height: 1.6;">
+                      <strong>Your account details:</strong><br>
+                      Email: {{email}}<br>
+                      Temporary Password: <strong>{{temporaryPassword}}</strong><br>
+                      Role: {{role}}<br>
+                      {{brandInfo}}
+                    </p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td align="center" style="padding: 0;">
+                    <p style="margin: 0; color: #a69e6d; font-size: 14px; line-height: 1.5;">
+                      If you have any questions, please contact the administrator.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding: 20px 40px 40px 40px; border-top: 1px solid #2a3544;">
+              <p style="margin: 0; color: #6b7280; font-size: 12px; line-height: 1.5;">
+                If you didn't expect this invitation, please ignore this email.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

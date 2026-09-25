@@ -1,0 +1,31 @@
+{
+  "name": "@whiskey-social/image-keys",
+  "version": "1.0.0",
+  "description": "Type-safe image key utilities for Whiskey Social apps",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "react-native": "src/index.ts",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "yarn build"
+  },
+  "keywords": [
+    "image",
+    "keys",
+    "typescript",
+    "whiskey-social"
+  ],
+  "author": "Whiskey Social Team",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,0 +1,36 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/my_collection_domain/exclude_whiskey_my_collection'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------------------------------
+- tapOn:
+    id: "my-collection"
+- swipe:
+    start: "45%,67%"
+    end: "51%,23%"
+    duration: 1048
+- swipe:
+    start: "92%,50%"
+    end: "51%,51%"
+    duration: 2610
+- assertVisible: ".*10th Mountain Bourbon.*"
+- tapOn: "10th Mountain Bourbon Bourbon 1 Bottle"
+- tapOn:
+    point: "85%,83%"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "home"
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

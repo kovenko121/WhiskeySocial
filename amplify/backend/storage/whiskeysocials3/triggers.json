@@ -1,0 +1,11 @@
+{
+    "triggers": {
+      "s3Trigger": [
+        {
+          "name": "ImageContentModeration",
+          "events": ["s3:ObjectCreated:*"],
+          "prefix": "public/"
+        }
+      ]
+    }
+  }

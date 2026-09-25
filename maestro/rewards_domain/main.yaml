@@ -1,0 +1,21 @@
+appId: app.whiskeysocial
+---
+- tapOn:
+    id: "reward"
+- assertVisible: "WS Rewards"
+
+- runFlow: 
+    file: 'rewards_claim_branded-hat.yaml'
+    env:
+      ORIGIN: "notCongratulations"
+
+- runFlow: 
+    file: 'rewards_claim_t-shirt.yaml'
+    env:
+      ORIGIN: "notCongratulations"
+
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../my_collection_domain/main.yaml'

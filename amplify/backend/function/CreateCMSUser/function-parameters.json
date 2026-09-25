@@ -1,0 +1,26 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "api": {
+      "whiskeysocial": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
+    "auth": {
+      "whiskeysocial1f41304e": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "cmsUrl",
+      "environmentVariableName": "CMS_URL"
+    }
+  ]
+}

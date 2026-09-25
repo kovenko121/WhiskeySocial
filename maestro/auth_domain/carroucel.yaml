@@ -1,0 +1,27 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/auth_domain/carroucel_ws'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- runFlow:
+    when:
+      visible: "Organize your collection"
+    commands:
+      - assertVisible: "Access your own bottles anywhere."
+      - tapOn: " Next"
+      - assertVisible: "Interact with friends"
+      - assertVisible: "Check what they are drinking and give your own impressions."
+      - tapOn: " Next"
+      - assertVisible: "Improve your venue visibility"
+      - tapOn: "Share your full whiskey menu and show up on the search results and nearby\
+            \ places for users."
+      - tapOn: " Next"
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

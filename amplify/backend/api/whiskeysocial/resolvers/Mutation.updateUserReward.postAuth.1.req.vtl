@@ -1,0 +1,19 @@
+## [Start] Sandbox Mode Disabled, IAM Access Disabled. **
+#if( !$ctx.stash.get("hasAuth") )
+  $util.unauthorized()
+#end
+## [Start] Re-redemption guard: block owner updates to already-redeemed rewards **
+#set( $groupsInToken = $util.defaultIfNull($ctx.identity.claims.get("cognito:groups"), []) )
+#if( !$groupsInToken.contains("Admin") )
+  #if( $util.isNull($ctx.stash.conditions) )
+    $util.qr($ctx.stash.put("conditions", []))
+  #end
+  $util.qr($ctx.stash.conditions.add({
+    "isRedeemed": {
+      "ne": true
+    }
+  }))
+#end
+## [End] Re-redemption guard **
+$util.toJson({})
+## [End] Sandbox Mode Disabled, IAM Access Disabled. **

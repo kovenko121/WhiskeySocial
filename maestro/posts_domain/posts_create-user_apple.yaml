@@ -1,0 +1,64 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/posts_domain/posts_create_user-apple'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#---------- Post 01 com check in paera premio checkin -----------------------------
+- tapOn:
+    id: "what-are-you-drinking-today"
+- swipe:
+    start: "81%,37%"
+    end: "33%,38%"
+    duration: 1418
+- tapOn: 
+    id: "check-in"
+- tapOn:
+    id: "search-user"
+- inputText: "Dsadadas"
+- tapOn:
+    id: "Done"
+- tapOn: "Dsadadas Rua Ivo Stengler 713, Cascavel, Pr"
+- tapOn:
+    id: "share"
+- runFlow: 
+    when:
+      visible: "Congratulations"
+    commands:
+      - runFlow: '../activity_domain/congratulations.yaml'
+
+#---------- Post 02 para premio post criado -----------------------------
+- tapOn:
+    id: "what-are-you-drinking-today"
+- inputText: "Testando inserção, depois excluindo"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "share"
+#-------------delete Post------------------------
+- scrollUntilVisible:
+    centerElement: true
+    element: "Testando inserção, depois excluindo"
+    direction: DOWN
+- tapOn:
+    id: "options"
+- tapOn: 
+    id: "delete-post"
+#-------------------------------------
+- swipe:
+    start: "53%,10%"
+    end: "45%,87%"
+    duration: 2924
+- runFlow: 
+    when:
+      notVisible: "Congratulations"
+    commands:
+      - runFlow: '../auth_domain/logout.yaml'
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

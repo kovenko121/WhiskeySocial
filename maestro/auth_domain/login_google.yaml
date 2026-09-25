@@ -1,0 +1,45 @@
+appId: app.teetimetrainer
+env:
+  RECORD_FILE: 'assets/records/auth_domain/login_google'
+
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- assertVisible: 'Login or Signup'
+- tapOn:
+    id: 'login-with-google'
+- waitForAnimationToEnd:
+    timeout: 1000
+- tapOn:
+    point: '50%,48%'
+- waitForAnimationToEnd:
+    timeout: 1000
+- inputText: ${GOOGLE_EMAIL}
+- tapOn:
+    point: "92%,58%"
+- tapOn:
+    point: "84%,77%"
+- waitForAnimationToEnd:
+    timeout: 1000
+- tapOn:
+    point: '50%,48%'
+- waitForAnimationToEnd:
+    timeout: 1000
+- inputText: ${GOOGLE_PASSWORD}
+- tapOn:
+    point: "92%,58%"
+- waitForAnimationToEnd:
+    timeout: 1000
+- tapOn:
+    point: "84%,78%"
+- waitForAnimationToEnd:
+    timeout: 4000
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording
+

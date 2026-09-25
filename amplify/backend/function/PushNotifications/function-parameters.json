@@ -1,0 +1,53 @@
+{
+  "permissions": {
+    "storage": {
+      "whiskeysocials3": [
+        "read"
+      ],
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Whiskey:@model(appsync)": [
+        "read"
+      ],
+      "Comment:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Post:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Notification:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "Club:@model(appsync)": [
+        "read"
+      ],
+      "ClubMember:@model(appsync)": [
+        "read"
+      ],
+      "ClubWhiskey:@model(appsync)": [
+        "read"
+      ],
+      "ConversationParticipant:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "Message:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

@@ -1,0 +1,128 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/my_wishlist_domain/exclude_my_whiskey-list'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------excluindo da minha lista de uisques------------------------
+- tapOn:
+    id: "my-collection"
+- scrollUntilVisible:
+    element: "Check-in"
+    direction: "DOWN"
+    speed: 90
+- tapOn: "15 Stars Private Stock Bourbon  0"
+- tapOn:
+    id: "--wishlist"
+- swipe:
+    start: "85%,50%"
+    end: "33%,48%"
+    duration: 1178
+- tapOn: .*291 Fresh Un-Aged.*
+- tapOn:
+    id: "+-my-collection"
+- tapOn:
+    id: "age"
+- inputText: "12"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "batch-#"
+- inputText: "453/2020"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "bottle-#"
+- inputText: "750-2012"
+- tapOn:
+    id: "barrel-#"
+- inputText: "Carvalho"
+- tapOn:
+    id: "rick-#"
+- inputText: "12b"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "warehouse"
+- inputText: "To na duvida do tamanho"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "store-pick"
+- inputText: "Casa da vovozinha"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "purchase-year"
+- inputText: "2021"
+- tapOn: "Done"
+- swipe:
+    start: "54%,78%"
+    end: "48%,54%"
+    duration: 1368
+- tapOn:
+    id: "notes"
+- inputText: "Uisque de cana de açucar"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "add-to-my-collection"
+- tapOn:
+    id: "star-4"
+- tapOn:
+    id: "title-your-review"
+- inputText: "Uisque de cana de açucar"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "leave-your-review"
+- inputText: "Tentando degustar cachaça, e achando que é uisque"
+- tapOn:
+    id: "Done"
+- tapOn: "Oaky"
+- tapOn: "Silky"
+- tapOn: "Herbal"
+- tapOn: "Briny"
+- tapOn: "Spicy"
+- tapOn: "Smoky"
+- tapOn: "Fruity"
+- tapOn:
+    point: "77%,78%"
+- tapOn:
+    point: "24%,78%"
+- tapOn:
+    point: "58%,74%"
+- tapOn:
+    point: "51%,82%"
+- tapOn:
+    id: "save-review-and-add-to-my-collection"
+- swipe:
+    start: "12%,44%"
+    end: "81%,44%"
+    duration: 1935
+- tapOn: .*Orphan Barrel Foragers.*
+- tapOn:
+    id: "--wishlist"
+- swipe:
+    start: "46%,26%"
+    end: "33%,79%"
+    duration: 2081
+- swipe:
+    start: "38%,70%"
+    end: "43%,11%"
+    duration: 2668
+- tapOn: .*291 Fresh Un-Aged.*
+- tapOn:
+    id: "--wishlist"
+- tapOn:
+    id: "home"
+- runFlow: "../my_collection_domain/exclude_whiskey_inserted_to_my_wishlist.yaml"
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

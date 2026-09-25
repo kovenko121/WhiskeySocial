@@ -1,0 +1,60 @@
+#set( $indexPath = "/userwhiskeys/_search" )
+
+#set($query = {
+  "bool": {}
+})
+
+#set($sort = [])
+
+#if (!$util.isNull($context.args.input.byGeoPoint))
+  $util.qr($sort.add({
+    "_geo_distance": {
+      "geo":  $context.args.input.byGeoPoint,
+      "order": "asc",
+      "unit": "mi",
+      "distance_type": "plane"
+    }
+  }))
+#end
+
+#set($notNullFilter = {
+  "exists": {
+    "field": "geo"
+  }
+})
+
+#set($filters = [])
+
+$util.qr($filters.add($notNullFilter))
+
+#if (!$util.isNull($context.args.input.byWhiskeyId))
+  $util.qr($filters.add({
+    "term": {
+      "whiskeyId.keyword": "$context.args.input.byWhiskeyId"
+    }
+  }))
+#end
+
+$util.qr($query.bool.put("filter", $filters))
+
+#if (!$util.isNull($context.args.input))
+  #set($from = $util.defaultIfNull($context.args.input.nextToken, 0))
+  #set($size = $util.defaultIfNull($context.args.input.limit, 20))
+#else
+  #set($from = 0)
+  #set($size = 20)
+#end
+
+{
+  "version":"2017-02-28",
+  "operation":"GET",
+  "path":"$indexPath",
+  "params":{
+    "body": {
+      "from": $util.toJson($from),
+      "size": $util.toJson($size),
+      "query": $util.toJson($query),
+      "sort": $util.toJson($sort)
+    }
+  }
+}

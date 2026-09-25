@@ -1,0 +1,49 @@
+{
+  "Records": [
+      {
+          "eventID": "514be0c9fc21c97581d8f7efacc55029",
+          "eventName": "INSERT",
+          "eventVersion": "1.1",
+          "eventSource": "aws:dynamodb",
+          "awsRegion": "us-east-2",
+          "dynamodb": {
+              "ApproximateCreationDateTime": 1726578563,
+              "Keys": {
+                  "id": {
+                      "S": "669533a0-4bd5-40dd-aac2-d71a5941f755"
+                  }
+              },
+              "NewImage": {
+                  "owner": {
+                      "S": "0103ebfa-8370-42e3-b1d9-a7dd3721b63e::signinwithapple_001651.5ae6d0fe76864628b904ce195e5f2143.1438"
+                  },
+                  "createdAt": {
+                      "S": "2024-09-17T13:09:23.069Z"
+                  },
+                  "__typename": {
+                      "S": "UserPours"
+                  },
+                  "whiskeyFullName": {
+                      "S": "10th mountain american single malt"
+                  },
+                  "whiskeyId": {
+                      "S": "74d5ce3f-4ee4-480f-86cd-0f53eb6c954e"
+                  },
+                  "id": {
+                      "S": "669533a0-4bd5-40dd-aac2-d71a5941f755"
+                  },
+                  "userId": {
+                      "S": "0103ebfa-8370-42e3-b1d9-a7dd3721b63e"
+                  },
+                  "updatedAt": {
+                      "S": "2024-09-17T13:09:23.069Z"
+                  }
+              },
+              "SequenceNumber": "63827000001430181371691548",
+              "SizeBytes": 400,
+              "StreamViewType": "NEW_AND_OLD_IMAGES"
+          },
+          "eventSourceARN": "arn:aws:dynamodb:us-east-2:654654138161:table/UserPours-sqhpxsc3kfbvlinltn724ypame-staging/stream/2024-09-02T19:01:05.003"
+      }
+  ]
+}

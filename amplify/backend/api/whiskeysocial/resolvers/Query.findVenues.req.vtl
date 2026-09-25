@@ -1,0 +1,51 @@
+#set( $indexPath = "/user/_search" )
+
+#if (!$util.isNull($context.args.input))
+  #set($from = $util.defaultIfNull($context.args.input.nextToken, 0))
+  #set($size = $util.defaultIfNull($context.args.input.limit, 50))
+#else
+  #set($from = 0)
+  #set($size = 50)
+#end
+
+{
+  "version":"2017-02-28",
+  "operation":"GET",
+  "path":"$indexPath",
+  "params":{
+    "body": {
+      "from": $from,
+      "size": $size,
+      "query": {
+        "bool": {
+          "filter": [
+            {"exists": {"field": "venueAddressGeo"}}
+            #if (!$util.isNull($context.args.input.byGeoPoint))
+              ,{"geo_distance": {
+                "distance": "${context.args.input.byGeoPoint.radius}km",
+                "venueAddressGeo": {
+                  "lat": $context.args.input.byGeoPoint.geoPoint.lat,
+                  "lon": $context.args.input.byGeoPoint.geoPoint.lon
+                }
+              }}
+            #end
+          ],
+          "must": {"match_all": {}},
+          "must_not": [{"term": {"archived": true}}, {"term": {"deleted": true}}]
+        }
+      },
+      "sort": [
+        #if (!$util.isNull($context.args.input.byGeoPoint))
+          {"_geo_distance": {
+            "venueAddressGeo": {
+              "lat": $context.args.input.byGeoPoint.geoPoint.lat,
+              "lon": $context.args.input.byGeoPoint.geoPoint.lon
+            },
+            "order": "asc",
+            "unit": "km"
+          }}
+        #end
+      ]
+    }
+  }
+}

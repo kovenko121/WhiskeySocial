@@ -1,0 +1,286 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/my_collection_domain/add_whiskey_my_collection'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#---------------whiskey 01----------------------
+- tapOn:
+    id: "my-collection"
+- runFlow:
+    when:
+      visible: .*My Collection.*
+    commands:
+      - tapOn:
+          id: "add"
+      - tapOn: "Rye"
+      - tapOn:
+          id: "search-by-name,-brand,-etc"
+      - inputText: "Barrell Bourbon Gold Label Seagrass"
+      - tapOn:
+          id: "Done"
+- runFlow:
+    when:
+      visible:
+          id: "barrell-bourbon-gold-label-seagrass"
+    commands:
+      - tapOn:
+          id: "barrell-bourbon-gold-label-seagrass"
+      - assertVisible: "Bottle Details"
+      - tapOn:
+          id: "age"
+      - inputText: "12"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "batch-#"
+      - inputText: "453/2020"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "bottle-#"
+      - inputText: "750-2012"
+      - tapOn:
+          id: "barrel-#"
+      - inputText: "Carvalho"
+      - tapOn:
+          id: "rick-#"
+      - inputText: "12b"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "warehouse"
+      - inputText: "Bem Grandão"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "store-pick"
+      - inputText: "Casa da LuzVermelha"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "purchase-year"
+      - inputText: "2022"
+      - tapOn: "Done"
+      - swipe:
+          start: "54%,78%"
+          end: "48%,54%"
+          duration: 1368
+      - tapOn:
+          id: "notes"
+      - inputText: "Uisque de chocolate com canela"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "add-to-my-collection"
+      - tapOn:
+          id: "star-4"
+      - tapOn:
+          id: "title-your-review"
+      - inputText: "Uisque de Chocolate com Canela"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "leave-your-review"
+      - inputText: "Testando o campo da descrição do produto"
+      - tapOn:
+          id: "Done"
+      - tapOn: "Oaky"
+      - tapOn: "Silky"
+      - tapOn: "Herbal"
+      - tapOn: "Briny"
+      - tapOn: "Spicy"
+      - tapOn: "Smoky"
+      - tapOn: "Fruity"
+      - tapOn:
+          point: "77%,78%"
+      - tapOn:
+          point: "24%,78%"
+      - tapOn:
+          point: "58%,74%"
+      - tapOn:
+          point: "51%,82%"
+      - tapOn:
+          id: "save-review-and-add-to-my-collection"
+- runFlow:
+    when:
+      visible: .*Suggest New Whiskey.*
+    commands:
+      - tapOn:
+          id: "navigation-back"
+#---------------whiskey 02----------------------
+- runFlow:
+    when:
+      visible: .*My Collection.*
+    commands:
+      - tapOn:
+          id: "add"
+      - tapOn:
+          id: "10th-mountain-bourbon"
+      - assertVisible: "Bottle Details"
+      - tapOn:
+          id: "age"
+      - inputText: "25"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "batch-#"
+      - inputText: "123/1999"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "bottle-#"
+      - inputText: "1000"
+      - tapOn:
+          id: "barrel-#"
+      - inputText: "Cerejeira"
+      - tapOn:
+          id: "rick-#"
+      - inputText: "55d"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "warehouse"
+      - inputText: "Bem Pequeno"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "store-pick"
+      - inputText: "Casa da Jacutinga"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "purchase-year"
+      - inputText: "2002"
+      - tapOn: "Done"
+      - swipe:
+          start: "54%,78%"
+          end: "48%,54%"
+          duration: 1368
+      - tapOn:
+          id: "notes"
+      - inputText: "Uisque de chocolate com Pimenta"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "add-to-my-collection"
+      - tapOn:
+          id: "star-2"
+      - tapOn:
+          id: "title-your-review"
+      - inputText: "Uisque de Chocolate com Pimenta"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "leave-your-review"
+      - inputText: "Testando o campo da descrição do produto item 02"
+      - tapOn:
+          id: "Done"
+      - tapOn: "Silky"
+      - tapOn: "Briny"
+      - tapOn: "Spicy"
+      - tapOn: "Fruity"
+      - tapOn: "Smoky"
+      - tapOn: "Buttery"
+      - tapOn: "Herbal"
+
+      - tapOn:
+          id: "save-review-and-add-to-my-collection"
+#---------------whiskey 03----------------------
+- tapOn:
+    id: "search"
+- tapOn: " Search whiskey, people, places, etc."
+- tapOn: "Canadian"
+- runFlow:
+    when:
+      visible: 
+        id: "proof-&-wood-good-day-blended-candian-whiskey"
+    commands:
+      - tapOn:
+          id: "proof-&-wood-good-day-blended-candian-whiskey"
+      - runFlow:
+          when:
+            visible:
+              id: "+-my-collection"
+          commands:
+            - tapOn:
+                id: "+-my-collection"      
+            - tapOn:
+                id: "age"
+            - inputText: "10"
+            - tapOn:
+                id: "Done"
+            - tapOn:
+                id: "batch-#"
+            - inputText: "105/2014"
+            - tapOn:
+                id: "Done"
+            - tapOn:
+                id: "bottle-#"
+            - inputText: "80"
+            - tapOn:
+                id: "barrel-#"
+            - inputText: "Carvalho"
+            - tapOn:
+                id: "rick-#"
+            - inputText: "51c"
+            - tapOn:
+                id: "Done"
+            - tapOn:
+                id: "warehouse"
+            - inputText: "Bem Medio"
+            - tapOn:
+                id: "Done"
+            - tapOn:
+                id: "store-pick"
+            - inputText: "Casa da Lolo"
+            - tapOn:
+                id: "Done"
+            - tapOn:
+                id: "purchase-year"
+            - inputText: "2019"
+            - tapOn: "Done"
+            - swipe:
+                start: "54%,78%"
+                end: "48%,54%"
+                duration: 1368
+            - tapOn:
+                id: "notes"
+            - inputText: "Uisque de mé com cachaça"
+            - tapOn:
+                id: "Done"
+            - tapOn:
+                id: "add-to-my-collection"
+            - tapOn:
+                id: "star-5"
+            - tapOn:
+                id: "title-your-review"
+            - inputText: "Uisque (Mé c/ Cachaça)"
+            - tapOn:
+                id: "Done"
+            - tapOn:
+                id: "leave-your-review"
+            - inputText: "Testando o campo da descrição do produto 03"
+            - tapOn:
+                id: "Done"
+            - tapOn: "Silky"
+            - tapOn: "Briny"
+            - tapOn: "Smoky"
+            - tapOn: "Buttery"
+            - tapOn: "Herbal"
+            - tapOn:
+                id: "save-review-and-add-to-my-collection"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "home"
+#--------------------------------------
+
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

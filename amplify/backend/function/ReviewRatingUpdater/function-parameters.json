@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "storage": {
+      "Review:@model(appsync)": [
+        "read"
+      ],
+      "Whiskey:@model(appsync)": [
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

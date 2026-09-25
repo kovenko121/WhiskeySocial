@@ -1,0 +1,87 @@
+{
+  "Records": [
+      {
+          "eventID": "43e193cd1a5fbc0efc899dffbc860ee5",
+          "eventName": "INSERT",
+          "eventVersion": "1.1",
+          "eventSource": "aws:dynamodb",
+          "awsRegion": "us-east-2",
+          "dynamodb": {
+              "ApproximateCreationDateTime": 1696436782,
+              "Keys": {
+                  "id": {
+                      "S": "7eac3313-9f20-4d06-82ca-8f7252d4b435"
+                  }
+              },
+              "NewImage": {
+                  "createdAt": {
+                      "S": "2023-09-29T21:43:33.147Z"
+                  },
+                  "__typename": {
+                      "S": "Guides"
+                  },
+                  "subtitle": {
+                      "S": "Lorem Ipsum"
+                  },
+                  "coverPhoto": {
+                      "M": {
+                          "bucket": {
+                              "S": "whiskeysocial2d14e0f954344c8fb7581e24a444bd14161841-dev"
+                          },
+                          "region": {
+                              "S": "us-east-2"
+                          },
+                          "key": {
+                              "S": "60160D81-8E90-4890-A0D7-C529E5C0743C.jpg"
+                          }
+                      }
+                  },
+                  "id": {
+                      "S": "7eac3313-9f20-4d06-82ca-8f7252d4b435"
+                  },
+                  "tag": {
+                      "S": "news"
+                  },
+                  "body": {
+                      "L": [
+                          {
+                              "S": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet a mi eget hendrerit. Proin eget elit hendrerit, posuere urna in, pretium nulla. Mauris iaculis libero ac nibh sollicitudin gravida. Suspendisse eget vestibulum metus, sit amet interdum mi. Nam tincidunt convallis neque ut mollis."
+                          },
+                          {
+                              "S": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean laoreet a mi eget hendrerit. Proin eget elit hendrerit, posuere urna in, pretium nulla. Mauris iaculis libero ac nibh sollicitudin gravida. Suspendisse eget vestibulum metus, sit amet interdum mi. Nam tincidunt convallis neque ut mollis."
+                          }
+                      ]
+                  },
+                  "title": {
+                      "S": "Lorem 2"
+                  },
+                  "photos": {
+                      "L": [
+                          {
+                              "M": {
+                                  "bucket": {
+                                      "S": "whiskeysocial2d14e0f954344c8fb7581e24a444bd14161841-dev"
+                                  },
+                                  "region": {
+                                      "S": "us-east-2"
+                                  },
+                                  "key": {
+                                      "S": "60160D81-8E90-4890-A0D7-C529E5C0743C.jpg"
+                                  }
+                              }
+                          }
+                      ]
+                  },
+                  "updatedAt": {
+                      "S": "2023-09-29T21:43:33.147Z"
+                  }
+              },
+
+              "SequenceNumber": "40312100000000012977109693",
+              "SizeBytes": 2150,
+              "StreamViewType": "NEW_AND_OLD_IMAGES"
+          },
+          "eventSourceARN": "arn:aws:dynamodb:us-east-2:130261235091:table/Guides-zuz2oevzuzg3llo2wbjre2ovey-dev/stream/2023-09-26T01:11:17.023"
+      }
+  ]
+}

@@ -1,0 +1,44 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/all_app_start'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'all' || RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- launchApp:
+    clearState: true
+- runFlow:
+    when:
+      visible:
+        text: 'http.*'
+    commands:
+      - tapOn: 'http.*'
+- assertVisible: "Where \nevery sip \nis shared"
+- assertVisible: "Login or register a new account to start using Whiskey Social. "
+- tapOn: 
+    id: "continue"
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording 
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:             
+      - runFlow: 'auth_domain/main.yaml'
+# - runFlow:
+#     when:
+#       true: ${FULL_FLOW === 'true'}
+#     commands:
+#       - runFlow: '../activity_domain/notifications_clear.yaml'
+      
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'all'}
+    commands:
+      - stopRecording
+
+

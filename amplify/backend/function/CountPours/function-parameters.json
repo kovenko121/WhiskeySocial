@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "storage": {
+      "UserPours:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

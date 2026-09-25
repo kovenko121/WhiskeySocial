@@ -1,0 +1,85 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/rewards_claim_t-shirt'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+
+#-------------------- reward T-shirt ---------------
+- runFlow:
+    when:
+      true: ${ORIGIN == 'notCongratulations'}
+    commands:  
+      - scrollUntilVisible:
+          element: "Whiskey-themed T-shirt"
+          direction: "RIGHT"
+          speed: 90
+
+      - tapOn:
+          id: "-claim-reward!-whiskey-themed-t-shirt"
+- tapOn:
+    id: "fill-shipping-info" 
+- tapOn: "Shirt Size"
+- tapOn: "Medium"
+- tapOn: "Model"
+- tapOn:
+    text: "0%"
+    index: 1
+- tapOn:
+    id: "full-name"
+- inputText: "Test User"
+- tapOn:
+    id: "e-mail"
+- inputText: "test-email@gmail.com"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "address"
+- inputText: "Rua da Esquina, 1234"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "address-2"
+- inputText: "Bairro da Lagoa"
+- tapOn:
+    id: "Done"
+- tapOn: 
+    id: "city"
+- inputText: "Curitiba"
+- tapOn:
+    id: "Done" 
+- "scroll" 
+- tapOn:
+    id: "state"
+- inputText: "Paraná"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "zipcode"
+- inputText: "80205480"
+- tapOn: "Done"      
+- tapOn: "checkbox, not checked"
+- tapOn:
+    id: "continue-to-review"
+- tapOn:
+    id: "navigation-back"
+- waitForAnimationToEnd:
+    timeout: 500
+- tapOn:
+    id: "navigation-back"
+- waitForAnimationToEnd:
+    timeout: 500
+- tapOn:
+    id: "navigation-back"
+- waitForAnimationToEnd:
+    timeout: 500
+- tapOn:
+    id: "navigation-back"
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

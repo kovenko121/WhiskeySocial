@@ -1,0 +1,12 @@
+appId: app.whiskeysocial
+---
+- runFlow:
+    when:
+      visible: "Profile Info"
+    commands:
+      - runFlow: 'onboarding-0_name_codiname.yaml'
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true' && ORIGIN != 'apple'} 
+    commands:
+      - runFlow: '../activity_domain/main.yaml'

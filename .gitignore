@@ -1,0 +1,58 @@
+# dependencies
+node_modules/
+
+# Expo / Metro
+.expo/
+.expo-shared/
+dist/
+web-build/
+*.tsbuildinfo
+
+# Next.js (cms)
+.next/
+out/
+
+# Android build output
+android/.gradle/
+android/build/
+android/app/build/
+android/app/.cxx/
+android/.idea/
+android/local.properties
+*.apk
+*.aab
+
+# iOS build output
+ios/Pods/
+ios/build/
+*.xcuserstate
+xcuserdata/
+
+# Amplify local state
+amplify/\#current-cloud-backend/
+amplify/.config/local-*
+amplify/logs/
+amplify/team-provider-info.json
+amplify/mock-data/
+amplify/mock-api-resources/
+amplify/backend/amplify-meta.json
+amplify/backend/.temp/
+amplify/backend/awscloudformation/
+build/
+
+# env & secrets
+.env
+.env*.local
+*.jks
+*.keystore
+!debug.keystore
+*.p8
+*.p12
+*.mobileprovision
+
+# misc
+.DS_Store
+*.log
+npm-debug.*
+yarn-error.log
+coverage/

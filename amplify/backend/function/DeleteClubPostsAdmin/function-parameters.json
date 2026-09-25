@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "api": {
+      "whiskeysocial": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "storage": {
+      "Post:@model(appsync)": [
+        "read",
+        "delete"
+      ],
+      "Club:@model(appsync)": [
+        "read",
+        "update"
+      ],
+      "ClubMember:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

@@ -1,0 +1,10 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "auth": {
+      "whiskeysocial1f41304e": [
+        "read"
+      ]
+    }
+  }
+}

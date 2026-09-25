@@ -1,0 +1,19 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "storage": {
+      "Comment:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "apiWhiskeysocialUserlikestableName",
+      "environmentVariableName": "API_WHISKEYSOCIAL_USERLIKESTABLE_NAME"
+    }
+  ]
+}

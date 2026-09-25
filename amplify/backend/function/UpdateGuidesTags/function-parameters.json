@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "storage": {
+      "GuideTags:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "apiWhiskeysocialUserfavoriteguidestableName",
+      "environmentVariableName": "API_WHISKEYSOCIAL_USERFAVORITEGUIDESTABLE_NAME"
+    }
+  ]
+}

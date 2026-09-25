@@ -1,0 +1,131 @@
+import { amplify } from '@services';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { ListConversations } from './query/listConversations';
+import type { ConversationListItem } from './useConversations';
+
+type ProfilePictureS3 = {
+  bucket: string;
+  key: string;
+  region: string;
+};
+
+type ParticipantUser = {
+  id: string;
+  username: string;
+  profilePicture?: ProfilePictureS3 | null;
+  deleted?: boolean | null;
+};
+
+type ConversationParticipantRaw = {
+  userId: string;
+  user: ParticipantUser;
+};
+
+type ConversationRaw = {
+  id: string;
+  participantIds: string[];
+  lastMessageText?: string | null;
+  lastMessageSenderId?: string | null;
+  lastMessageAt?: string | null;
+  participants: {
+    items: ConversationParticipantRaw[];
+  };
+};
+
+type ConversationParticipantItem = {
+  id: string;
+  conversationId: string;
+  userId: string;
+  unreadCount: number;
+  lastReadAt?: string | null;
+  isMuted: boolean;
+  isDeleted: boolean;
+  requestStatus: string;
+  conversation: ConversationRaw;
+  createdAt: string;
+  updatedAt: string;
+};
+
+type RawResponse = {
+  nextToken: string | null;
+  items: ConversationParticipantItem[];
+};
+
+type MessageRequestsResponse = {
+  nextToken: string | null;
+  items: ConversationListItem[];
+};
+
+function transformRequests(
+  raw: RawResponse,
+  currentUserId: string,
+): MessageRequestsResponse {
+  const items: ConversationListItem[] = raw.items
+    .filter((participant) => {
+      const { conversation } = participant;
+      if (!conversation) return false;
+      const otherParticipant = conversation.participants?.items?.find(
+        (p) => p.userId !== currentUserId,
+      );
+      return otherParticipant?.user && !otherParticipant.user.deleted;
+    })
+    .map((participant) => {
+      const { conversation } = participant;
+      const otherParticipant = conversation.participants.items.find(
+        (p) => p.userId !== currentUserId,
+      )!;
+      return {
+        conversationId: participant.conversationId,
+        participantId: participant.id,
+        otherUser: {
+          id: otherParticipant.user.id,
+          username: otherParticipant.user.username,
+          profilePicture: otherParticipant.user.profilePicture,
+        },
+        lastMessageText: conversation.lastMessageText,
+        lastMessageAt: conversation.lastMessageAt,
+        unreadCount: participant.unreadCount,
+        isMuted: participant.isMuted,
+      };
+    });
+
+  items.sort((a, b) => {
+    if (!a.lastMessageAt && !b.lastMessageAt) return 0;
+    if (!a.lastMessageAt) return 1;
+    if (!b.lastMessageAt) return -1;
+    return new Date(b.lastMessageAt).getTime() - new Date(a.lastMessageAt).getTime();
+  });
+
+  return { nextToken: raw.nextToken, items };
+}
+
+function useMessageRequests(currentUserId: string) {
+  const query = useInfiniteQuery<MessageRequestsResponse>({
+    queryKey: ['get-message-requests', currentUserId],
+    queryFn: async ({ pageParam }) => {
+      const { conversationParticipantsByUserIdAndConversationId } = await amplify.request<{
+        conversationParticipantsByUserIdAndConversationId: RawResponse;
+      }>(ListConversations, {
+        userId: currentUserId,
+        limit: 50,
+        nextToken: pageParam || null,
+        filter: {
+          isDeleted: { eq: false },
+          requestStatus: { eq: 'PENDING' },
+        },
+      });
+      return transformRequests(
+        conversationParticipantsByUserIdAndConversationId,
+        currentUserId,
+      );
+    },
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => lastPage?.nextToken || null,
+    enabled: !!currentUserId,
+    staleTime: 30 * 1000,
+  });
+
+  return query;
+}
+
+export { useMessageRequests };

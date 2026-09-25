@@ -1,0 +1,102 @@
+{
+  "Records": [
+    {
+      "eventID": "1",
+      "eventName": "INSERT",
+      "eventVersion": "1.0",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-1",
+      "dynamodb": {
+        "Keys": {
+          "id": {
+            "S": "review-123"
+          }
+        },
+        "NewImage": {
+          "id": {
+            "S": "review-123"
+          },
+          "whiskeyId": {
+            "S": "whiskey-abc-123"
+          },
+          "rating": {
+            "N": "4.5"
+          },
+          "userId": {
+            "S": "user-xyz"
+          }
+        },
+        "SequenceNumber": "111",
+        "SizeBytes": 26,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      }
+    },
+    {
+      "eventID": "2",
+      "eventName": "MODIFY",
+      "eventVersion": "1.0",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-1",
+      "dynamodb": {
+        "Keys": {
+          "id": {
+            "S": "review-456"
+          }
+        },
+        "NewImage": {
+          "id": {
+            "S": "review-456"
+          },
+          "whiskeyId": {
+            "S": "whiskey-abc-123"
+          },
+          "rating": {
+            "N": "5"
+          }
+        },
+        "OldImage": {
+          "id": {
+            "S": "review-456"
+          },
+          "whiskeyId": {
+            "S": "whiskey-abc-123"
+          },
+          "rating": {
+            "N": "3"
+          }
+        },
+        "SequenceNumber": "222",
+        "SizeBytes": 59,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      }
+    },
+    {
+      "eventID": "3",
+      "eventName": "REMOVE",
+      "eventVersion": "1.0",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-1",
+      "dynamodb": {
+        "Keys": {
+          "id": {
+            "S": "review-789"
+          }
+        },
+        "OldImage": {
+          "id": {
+            "S": "review-789"
+          },
+          "whiskeyId": {
+            "S": "whiskey-def-456"
+          },
+          "rating": {
+            "N": "2"
+          }
+        },
+        "SequenceNumber": "333",
+        "SizeBytes": 38,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      }
+    }
+  ]
+}

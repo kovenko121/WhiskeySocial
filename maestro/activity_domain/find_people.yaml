@@ -1,0 +1,34 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/find_people'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- tapOn:
+    id: "--find-people"
+- tapOn:
+    id: "search-user"
+- inputText: "Joana Raquel"
+- longPressOn:
+    id: "search-user"
+- tapOn: "Select All"
+- tapOn: "Cut"
+#- tapOn: "Cancel"
+- inputText: "Joana Brito"
+- tapOn: 
+    id: "Done"
+- tapOn: "Joana Brito @jobrito 2 Followers  Follow"
+- tapOn: 
+    id: "navigation-back"
+- swipe:
+    start: "56%,16%"
+    end: "56%,28%"
+    duration: 1064
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

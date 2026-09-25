@@ -1,0 +1,422 @@
+{
+  "Records": [
+    {
+      "eventID": "094ca7ebfe4e15722ca9ed2bafb61dc2",
+      "eventName": "MODIFY",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-2",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1692048079,
+        "Keys": {
+          "id": {
+            "S": "e11b2560-4041-709e-a085-e200359c36f8"
+          }
+        },
+        "NewImage": {
+          "owner": {
+            "S": "e11b2560-4041-709e-a085-e200359c36f8"
+          },
+          "coverPicture": {
+            "M": {
+              "bucket": {
+                "S": "whiskeysocial2d14e0f954344c8fb7581e24a444bd14161841-dev"
+              },
+              "region": {
+                "S": "us-east-2"
+              },
+              "key": {
+                "S": "0D2150B9-84CB-464C-93BF-32B843724DFE.jpg"
+              }
+            }
+          },
+          "_typename": {
+            "S": "User"
+          },
+          "expoTokens": {
+            "L": [
+              {
+                "S": "ExponentPushToken[KR2mVfLYqTc3Z5vyw1oj-5]"
+              }
+            ]
+          },
+          "securitySettings": {
+            "L": [
+              {
+                "M": {
+                  "name": {
+                    "S": "seePosts"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "Public"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "commentPosts"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "Public"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "commentPhotos"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "Public"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "location"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "true"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "seeLocation"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "Public"
+                  }
+                }
+              }
+            ]
+          },
+          "bio": {
+            "S": "Whiskey connoisseur 🥃"
+          },
+          "notificationSettings": {
+            "L": [
+              {
+                "M": {
+                  "name": {
+                    "S": "friends"
+                  },
+                  "description": {
+                    "S": "Allows you to customize how you receive notifications when someone sends you a friend request."
+                  },
+                  "value": {
+                    "S": "true"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "activities"
+                  },
+                  "description": {
+                    "S": "Allows you to receive notifications when a new activity is available on your feed."
+                  },
+                  "value": {
+                    "S": "true"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "whiskeyAvailable"
+                  },
+                  "description": {
+                    "S": "Allows you to receive notifications when a whiskey that you have been looking for becomes available in a nearby venue."
+                  },
+                  "value": {
+                    "S": "true"
+                  }
+                }
+              }
+            ]
+          },
+          "personFullName": {
+            "S": "taylor byk"
+          },
+          "createdAt": {
+            "S": "2023-08-02T18:46:57.299Z"
+          },
+          "profilePicture": {
+            "M": {
+              "bucket": {
+                "S": "whiskeysocial2d14e0f954344c8fb7581e24a444bd14161841-dev"
+              },
+              "region": {
+                "S": "us-east-2"
+              },
+              "key": {
+                "S": "E679860E-AF18-4749-9E5E-AB9C69711A64.jpg"
+              }
+            }
+          },
+          "deleted": {
+            "BOOL": false
+          },
+          "followers": {
+            "SS": [
+              "01dbe530-70f1-7083-c39d-1bce78956997",
+              "716b5550-1031-7014-1e46-6bbadc821e6b",
+              "c1cbe560-6021-7069-4c9e-de99127b7db9",
+              "d16b7500-b081-70b0-9773-40a202f2159a"
+            ]
+          },
+          "following": {
+            "SS": [
+              "013b9510-8031-7079-08e3-a455e6ee0161",
+              "01dbe530-70f1-7083-c39d-1bce78956997",
+              "716b5550-1031-7014-1e46-6bbadc821e6b",
+              "c1cbe560-6021-7069-4c9e-de99127b7db9",
+              "d16b7500-b081-70b0-9773-40a202f2159a"
+            ]
+          },
+          "personLastName": {
+            "S": "Byk"
+          },
+          "id": {
+            "S": "013b9510-8031-7079-08e3-a455e6ee0161"
+          },
+          "userType": {
+            "S": "PERSON"
+          },
+          "personFirstName": {
+            "S": "Taylor"
+          },
+          "updatedAt": {
+            "S": "2023-08-11T21:21:32.150Z"
+          },
+          "username": {
+            "S": "taylor"
+          }
+        },
+        "OldImage": {
+          "owner": {
+            "S": "e11b2560-4041-709e-a085-e200359c36f8"
+          },
+          "coverPicture": {
+            "M": {
+              "bucket": {
+                "S": "whiskeysocial2d14e0f954344c8fb7581e24a444bd14161841-dev"
+              },
+              "region": {
+                "S": "us-east-2"
+              },
+              "key": {
+                "S": "0D2150B9-84CB-464C-93BF-32B843724DFE.jpg"
+              }
+            }
+          },
+          "_typename": {
+            "S": "User"
+          },
+          "expoTokens": {
+            "L": [
+              {
+                "S": "ExponentPushToken[KR2mVfLYqTc3Z5vyw1oj-5]"
+              }
+            ]
+          },
+          "securitySettings": {
+            "L": [
+              {
+                "M": {
+                  "name": {
+                    "S": "seePosts"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "Public"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "commentPosts"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "Public"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "commentPhotos"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "Public"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "location"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "true"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "seeLocation"
+                  },
+                  "description": {
+                    "S": ""
+                  },
+                  "value": {
+                    "S": "Public"
+                  }
+                }
+              }
+            ]
+          },
+          "bio": {
+            "S": "Whiskey connoisseur 🥃"
+          },
+          "notificationSettings": {
+            "L": [
+              {
+                "M": {
+                  "name": {
+                    "S": "friends"
+                  },
+                  "description": {
+                    "S": "Allows you to customize how you receive notifications when someone sends you a friend request."
+                  },
+                  "value": {
+                    "S": "true"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "activities"
+                  },
+                  "description": {
+                    "S": "Allows you to receive notifications when a new activity is available on your feed."
+                  },
+                  "value": {
+                    "S": "true"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "whiskeyAvailable"
+                  },
+                  "description": {
+                    "S": "Allows you to receive notifications when a whiskey that you have been looking for becomes available in a nearby venue."
+                  },
+                  "value": {
+                    "S": "true"
+                  }
+                }
+              }
+            ]
+          },
+          "personFullName": {
+            "S": "taylor byk"
+          },
+          "createdAt": {
+            "S": "2023-08-02T18:46:57.299Z"
+          },
+          "profilePicture": {
+            "M": {
+              "bucket": {
+                "S": "whiskeysocial2d14e0f954344c8fb7581e24a444bd14161841-dev"
+              },
+              "region": {
+                "S": "us-east-2"
+              },
+              "key": {
+                "S": "E679860E-AF18-4749-9E5E-AB9C69711A64.jpg"
+              }
+            }
+          },
+          "deleted": {
+            "BOOL": false
+          },
+          "followers": {
+            "SS": [
+              "a10bd500-20b1-7011-971c-593b518dfb7a",
+              "c1cbe560-6021-7069-4c9e-de99127b7db9",
+              "d16b7500-b081-70b0-9773-40a202f2159a"
+            ]
+          },
+          "following": {
+            "SS": [
+              "013b9510-8031-7079-08e3-a455e6ee0161",
+              "01dbe530-70f1-7083-c39d-1bce78956997",
+              "716b5550-1031-7014-1e46-6bbadc821e6b",
+              "c1cbe560-6021-7069-4c9e-de99127b7db9",
+              "d16b7500-b081-70b0-9773-40a202f2159a"
+            ]
+          },
+          "personLastName": {
+            "S": "Byk"
+          },
+          "id": {
+            "S": "e11b2560-4041-709e-a085-e200359c36f8"
+          },
+          "userType": {
+            "S": "PERSON"
+          },
+          "personFirstName": {
+            "S": "Taylor"
+          },
+          "updatedAt": {
+            "S": "2023-08-11T21:21:32.150Z"
+          },
+          "username": {
+            "S": "taylor"
+          }
+        },
+        "SequenceNumber": "300134400000000003624406446",
+        "SizeBytes": 3412,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      },
+      "eventSourceARN": "arn:aws:dynamodb:us-east-2:130261235091:table/User-zuz2oevzuzg3llo2wbjre2ovey-dev/stream/2023-06-12T19:42:11.163"
+    },
+  ]
+}

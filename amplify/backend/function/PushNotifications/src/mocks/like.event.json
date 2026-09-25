@@ -1,0 +1,46 @@
+{
+  "Records": [
+    {
+      "eventID": "a762de10353c6866342fada8d558fe2f",
+      "eventName": "INSERT",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-2",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1692047121,
+        "Keys": {
+          "id": {
+            "S": "3551e437-45d9-4674-b940-0050e9014f6b"
+          }
+        },
+        "NewImage": {
+          "owner": {
+            "S": "013b9510-8031-7079-08e3-a455e6ee0161::013b9510-8031-7079-08e3-a455e6ee0161"
+          },
+          "createdAt": {
+            "S": "2023-08-14T21:05:21.353Z"
+          },
+          "__typename": {
+            "S": "UserLikes"
+          },
+          "id": {
+            "S": "3551e437-45d9-4674-b940-0050e9014f6b"
+          },
+          "postId": {
+            "S": "c0fb5e24-505d-41b7-968d-7c0b30a8f455"
+          },
+          "userId": {
+            "S": "013b9510-8031-7079-08e3-a455e6ee0161"
+          },
+          "updatedAt": {
+            "S": "2023-08-14T21:05:21.353Z"
+          }
+        },
+        "SequenceNumber": "190765000000000033903188509",
+        "SizeBytes": 324,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      },
+      "eventSourceARN": "arn:aws:dynamodb:us-east-2:130261235091:table/UserLikes-zuz2oevzuzg3llo2wbjre2ovey-dev/stream/2023-07-05T17:08:22.138"
+    }
+  ]
+}

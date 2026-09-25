@@ -1,0 +1,65 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/pours_domain/log_a_pour_from_bottle'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#--------------reaching the bottle-----------------------
+- tapOn:
+    id: "search"
+- tapOn: " Search whiskey, people, places, etc."
+- tapOn: "Canadian"
+- runFlow:
+    when:
+      visible:
+        id: "proof-&-wood-good-day-blended-candian-whiskey"
+    commands:
+      - tapOn:
+          id: "proof-&-wood-good-day-blended-candian-whiskey"
+#--------------the bottle arrives attached-----------------------
+      - assertVisible:
+          id: "log-a-pour"
+      - tapOn:
+          id: "log-a-pour"
+      - assertVisible:
+          id: "cancel"
+      - assertVisible:
+          id: "proof-&-wood-good-day-blended-candian-whiskey"
+      - assertVisible: "Proof & Wood Good Day Blended Candian Whiskey"
+#--------------and again after a cancel-----------------------
+      - tapOn:
+          id: "cancel"
+      - assertVisible:
+          id: "log-a-pour"
+      - tapOn:
+          id: "log-a-pour"
+      - assertVisible:
+          id: "proof-&-wood-good-day-blended-candian-whiskey"
+#--------------posting the pour-----------------------
+      - inputText: "Pour logged from the bottle page."
+      - tapOn:
+          id: "Done"
+      - assertVisible:
+          id: "proof-&-wood-good-day-blended-candian-whiskey"
+      - tapOn:
+          id: "share"
+#--------------the review prompt names the bottle-----------------------
+      - runFlow:
+          when:
+            visible:
+              id: "skip-review"
+          commands:
+            - assertVisible: "What do you think about Proof & Wood Good Day Blended Candian Whiskey?"
+            - tapOn:
+                id: "skip-review"
+- tapOn:
+    id: "home"
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

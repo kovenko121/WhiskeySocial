@@ -1,0 +1,53 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/my_wishlist_domain/include_my_whiskey-list'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------incluindo na minha lista de uisques------------------------
+- tapOn:
+    id: "my-collection"
+- scrollUntilVisible:
+    element: "Check-in"
+    direction: "DOWN"
+    speed: 90
+- tapOn: "+ Add a Whiskey"
+- tapOn: "American"
+- tapOn:
+    id: "291-fresh-un-aged-american-whiskey"
+- tapOn:
+    id: "+-wishlist"
+- tapOn: "+ Add"
+- swipe:
+    start: "92%,24%"
+    end: "22%,23%"
+    duration: 1690
+- swipe:
+    start: "81%,24%"
+    end: "49%,24%"
+    duration: 1132
+- tapOn: "Single Malt Scotch"
+- tapOn:
+    id: "orphan-barrel-foragers-keep-single-malt-scotch"
+- tapOn:
+    id: "+-wishlist"
+- tapOn: "+ Add"
+- tapOn:
+    id: "search-by-name,-brand,-etc"
+- inputText: "15 stars"
+- tapOn:
+    id: "Done"
+- tapOn:
+    point: "86%,86%"
+- tapOn:
+    id: "home"
+
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

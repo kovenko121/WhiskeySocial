@@ -1,0 +1,71 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/settings_domain/customize_notiffications'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#--------cunfigurando notificações-----------------------------
+- tapOn:
+    id: "settings"
+- tapOn:
+    id: "notifications"
+- assertVisible: "Notifications"
+- assertVisible: "Push Notifications"
+- tapOn:
+    text: "1"
+    index: 0
+- tapOn:
+    id: "save"
+- tapOn:
+    id: "notifications"
+- tapOn:
+    text: "0"
+    index: 0
+- tapOn:
+    id: "save"
+- tapOn:
+    id: "notifications"
+- assertVisible: "General Notifications"
+- assertVisible: "Discovery"
+- tapOn:
+    text: "1"
+    index: 1
+- tapOn:
+    id: "save"
+- tapOn:
+    id: "notifications"
+- tapOn:
+    text: "0"
+    index: 1
+- tapOn:
+    id: "save"
+- tapOn:
+    id: "notifications"
+- assertVisible: "New Activities"
+- tapOn:
+    text: "1"
+    index: 2
+- tapOn:
+    id: "save"
+- tapOn:
+    id: "notifications"
+- tapOn:
+    text: "0"
+    index: 1
+- tapOn:
+    id: "save"
+- tapOn:
+    id: "notifications"
+- tapOn:
+    id: "save"
+- tapOn:
+    id: "navigation-back"
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

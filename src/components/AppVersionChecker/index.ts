@@ -1,0 +1,1 @@
+export { AppVersionChecker } from './AppVersionChecker';

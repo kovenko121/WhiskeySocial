@@ -1,0 +1,29 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/congratulations'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- runFlow:
+    when:
+        visible: "Congratulations"
+    commands:
+        - assertVisible: "You've just completed a challenge!Now, go claim your prize."
+        - tapOn:
+            id: "go-to-prize!"
+        
+
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording
+
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../rewards_domain/main.yaml'

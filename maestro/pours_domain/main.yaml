@@ -1,0 +1,5 @@
+appId: app.whiskeysocial
+---
+- runFlow: 'insert_pours.yaml'
+- runFlow: 'log_a_pour_from_bottle.yaml'
+

@@ -1,0 +1,9 @@
+appId: app.whiskeysocial
+---
+- runFlow: 'discover.yaml'
+
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../articles_domain/main.yaml'

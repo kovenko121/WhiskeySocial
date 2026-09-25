@@ -1,0 +1,9 @@
+{
+  "arguments": {
+    "input": {
+      "userId": "test-user-123",
+      "postId": "test-post-456",
+      "action": "like"
+    }
+  }
+}

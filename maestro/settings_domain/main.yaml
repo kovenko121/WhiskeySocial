@@ -1,0 +1,7 @@
+appId: app.whiskeysocial
+---
+- runFlow: 'account_edit-my-account.yaml'
+- runFlow: 'customize_notifications.yaml'
+
+
+

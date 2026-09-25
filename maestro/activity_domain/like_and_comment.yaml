@@ -1,0 +1,65 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/like_and_comment'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- scrollUntilVisible:
+    centerElement: true
+    element: 
+        id: "see-comments"
+    direction: "DOWN"
+    speed: 90
+- tapOn: 
+    id: "see-comments"
+- longPressOn:
+    id: .*comment-as-.*
+- inputText: "Beber agua faz mal, escolha um Uísque no (Whiskey Social)"
+- tapOn: "Publish"
+- swipe:
+    start: "51%,20%"
+    end: "46%,83%"
+    duration: 1700
+- tapOn: 
+    id: "comment"
+- longPressOn:
+    point: "43%,82%"
+- inputText: "Beber agua faz mal, SERÁ????"
+- tapOn: "Publish"
+- waitForAnimationToEnd:
+    timeout: 600
+- swipe:
+    start: "51%,20%"
+    end: "46%,83%"
+    duration: 1700
+- tapOn:
+    id: "liked"
+- waitForAnimationToEnd:
+    timeout: 3000
+- waitForAnimationToEnd:
+    timeout: 4000
+- tapOn:
+    id: "liked"
+- swipe:
+    start: "49%,8%"
+    end: "36%,83%"
+    duration: 2052
+- swipe:
+    start: "47%,10%"
+    end: "38%,83%"
+    duration: 2324
+- scrollUntilVisible:
+    element: 
+      id: "ads"
+    direction: "UP"
+    visibilityPercentage: 90
+- waitForAnimationToEnd:
+    timeout: 1000
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

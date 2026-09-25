@@ -1,0 +1,14 @@
+{
+  "stopOnError": true,
+  "scripts": [
+    {
+      "name": "sync-app-version",
+      "path": "./scripts/sync-app-version.ts",
+      "description": "Updates app version in database and src/version.json",
+      "enabled": true,
+      "args": {
+        "execute": true
+      }
+    }
+  ]
+}

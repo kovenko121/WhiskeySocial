@@ -1,0 +1,52 @@
+appId: app.whiskeysocial
+env:
+    RECORD_FILE: 'assets/records/auth_domain/myEmail_ws'
+env: 
+    email_name: "test-email@gmail.com"
+env:
+    one: "1"
+env:
+    two: "2"
+env:
+    three: "3"
+---
+- assertVisible: "Login or Signup"
+- tapOn:
+    id: "enter-your-e-mail"
+- inputText: ${email_name}
+- tapOn:
+    id: "sign-in"
+- assertVisible: "Input the 6 digit\nVerification Code"
+- runFlow:
+    when:
+      true:
+        point: "21%,44%"
+      true:
+        point: "32%,44%"
+      true:
+        point: "44%,44%"
+      true:
+        point: "56%,44%"
+      true:
+        point: "67%,44%"
+      true:
+        point: "79%,44%"
+    commands:
+      - inputText: ${one}
+      - inputText: ${two}
+      - inputText: ${three}
+      - inputText: ${three}
+      - inputText: ${two}
+      - inputText: ${one}
+        
+- assertVisible: ""
+- assertVisible: "We've sent you the verification code"
+- assertVisible: "If you haven't received it, we can send you another one."
+- tapOn: "Resend Code"
+- tapOn: ""
+
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

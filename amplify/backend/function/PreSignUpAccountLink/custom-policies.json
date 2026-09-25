@@ -1,0 +1,12 @@
+[
+  {
+    "Action": [
+      "dynamodb:PutItem",
+      "dynamodb:GetItem",
+      "dynamodb:UpdateItem"
+    ],
+    "Resource": [
+      "arn:aws:dynamodb:*:*:table/signin-pendinglink-whiskeysocial-*"
+    ]
+  }
+]

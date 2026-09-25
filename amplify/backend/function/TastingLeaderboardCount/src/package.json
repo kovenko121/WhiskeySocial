@@ -1,0 +1,13 @@
+{
+  "name": "tastingleaderboardcount",
+  "version": "1.0.0",
+  "description": "Real-time Tasting Passport leaderboard aggregation (DynamoDB stream)",
+  "main": "index.js",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.92"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1691.0"
+  }
+}

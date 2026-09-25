@@ -1,0 +1,82 @@
+{
+  "Records": [
+    {
+      "eventID": "79b8a89bc9e327eed8945eb65c0d9eee",
+      "eventName": "INSERT",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-east-2",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1692983954,
+        "Keys": {
+          "id": {
+            "S": "f630f48a-6dfb-4386-92ea-e455ef7ad457"
+          }
+        },
+        "NewImage": {
+          "owner": {
+            "S": "013b9510-8031-7079-08e3-a455e6ee0161::013b9510-8031-7079-08e3-a455e6ee0161"
+          },
+          "createdAt": {
+            "S": "2023-08-25T17:19:13.722Z"
+          },
+          "likesCount": {
+            "N": "0"
+          },
+          "references": {
+            "L": [
+              {
+                "M": {
+                  "name": {
+                    "S": "blue label"
+                  },
+                  "id": {
+                    "S": "a048c168-ac80-4b1e-8d28-bf32157b0fa0"
+                  },
+                  "type": {
+                    "S": "WHISKEY"
+                  }
+                }
+              },
+              {
+                "M": {
+                  "name": {
+                    "S": "Ericlis Santos"
+                  },
+                  "id": {
+                    "S": "716b5550-1031-7014-1e46-6bbadc821e6b"
+                  },
+                  "type": {
+                    "S": "USER"
+                  }
+                }
+              }
+            ]
+          },
+          "__typename": {
+            "S": "Post"
+          },
+          "description": {
+            "S": "nothing"
+          },
+          "id": {
+            "S": "f630f48a-6dfb-4386-92ea-e455ef7ad457"
+          },
+          "authorId": {
+            "S": "013b9510-8031-7079-08e3-a455e6ee0161"
+          },
+          "title": {
+            "S": "is drinking a $0 with $1"
+          },
+          "updatedAt": {
+            "S": "2023-08-25T17:19:13.722Z"
+          }
+        },
+        "SequenceNumber": "242534600000000035315139331",
+        "SizeBytes": 491,
+        "StreamViewType": "NEW_AND_OLD_IMAGES"
+      },
+      "eventSourceARN": "arn:aws:dynamodb:us-east-2:130261235091:table/Post-zuz2oevzuzg3llo2wbjre2ovey-dev/stream/2023-07-05T17:08:22.221"
+    }
+  ]
+}

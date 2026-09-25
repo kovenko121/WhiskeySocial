@@ -1,0 +1,103 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/discover_domain/discover'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------------------------------
+- tapOn:
+    id: "search"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "search"
+- assertVisible: "Discover"
+- tapOn: " Search whiskey, people, places, etc."
+- tapOn: ""
+- assertVisible: "Specialist's Choice of the week"
+- tapOn:
+    id: "choice-of-the-week"
+- tapOn:
+    id: "navigation-back"
+- swipe:
+    start: "50%,84%"
+    end: "48%,20%"
+    duration: 2052
+- assertVisible: "Starter Picks"
+- swipe:
+    start: "66%,43%"
+    end: "31%,43%"
+    duration: 2146
+- waitForAnimationToEnd:
+    timeout: 1500
+- swipe:
+    start: "22%,42%"
+    end: "60%,43%"
+    duration: 2018
+- tapOn: "Bardstown Collab Series The Prisoner French Oak Red Wine Barrels Bourbon\
+    \ "
+- tapOn:
+    id: "navigation-back"
+- swipe:
+    start: "50%,87%"
+    end: "57%,49%"
+    duration: 2276
+- tapOn:
+    id: "ads"
+- tapOn:
+    id: "breadcrumb"
+- swipe:
+    start: "44%,82%"
+    end: "47%,31%"
+    duration: 2814
+- assertVisible: "Latest Articles"
+- tapOn:
+    id: "go-to-articles"
+- tapOn:
+    id: "navigation-back"
+- tapOn: "Agua faz bem  Water"
+- tapOn: ""
+- assertVisible: "Nearby Places"
+- tapOn:
+    id: "location-settings" #não abre o maps, porem no celular esta ok
+- tapOn:
+    id: "breadcrumb" #coloquei este porque perdeu os dados do (location-settings)
+# - tapOn: ""
+# - tapOn: ""
+# - tapOn:
+#     id: "fabiobar"
+# - tapOn:
+#     id: "navigation-back"
+# - swipe:
+#     start: "88%,77%"
+#     end: "13%,76%"
+#     duration: 2308
+# - swipe:
+#     start: "95%,78%"
+#     end: "13%,78%"
+#     duration: 1954
+# - swipe:
+#     start: "95%,78%"
+#     end: "8%,77%"
+#     duration: 2268
+# - swipe:
+#     start: "18%,77%"
+#     end: "70%,78%"
+#     duration: 1682
+# - tapOn:
+#     id: "patterson_house_nashville"
+# - tapOn:
+#     id: "navigation-back"
+- tapOn:
+    id: "home"
+
+
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

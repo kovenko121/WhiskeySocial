@@ -1,0 +1,1 @@
+export { InlineTagInput } from './InlineTagInput';

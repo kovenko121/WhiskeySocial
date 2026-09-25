@@ -1,0 +1,17 @@
+{
+  "arguments": {
+    "id": "9779705d-35f8-4bc9-8c60-cc10970fba9e",
+    "username": "olkbc",
+    "firstName": "Fausto",
+    "lastName": "Silva",
+    "venueName": null,
+    "phone": "undefined undefined",
+    "street": null,
+    "city": null,
+    "state": null,
+    "number": null,
+    "geoPoint": null,
+    "userType": "PERSON",
+    "venueMenu": null
+  }
+}

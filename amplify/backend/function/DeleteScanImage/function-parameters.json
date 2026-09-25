@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "storage": {
+      "whiskeysocials3": [
+        "read",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

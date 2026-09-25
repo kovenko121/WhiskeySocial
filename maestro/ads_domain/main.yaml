@@ -1,0 +1,9 @@
+appId: app.whiskeysocial
+---
+- runFlow: 'ads_see-more.yaml'
+
+# - runFlow:
+#     when:
+#       true: ${FULL_FLOW === 'true'}
+#     commands:
+#       - runFlow: '../Setting_domain/main.yaml'

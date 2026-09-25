@@ -1,0 +1,52 @@
+{
+  "lambdaLayers": [],
+  "permissions": {
+    "api": {
+      "whiskeysocial": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
+    "auth": {
+      "whiskeysocial1f41304e": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "whiskeysocials3": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ],
+      "User:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "token",
+      "environmentVariableName": "TOKEN"
+    },
+    {
+      "cloudFormationParameterName": "secret",
+      "environmentVariableName": "SECRET"
+    },
+    {
+      "cloudFormationParameterName": "cmsUrl",
+      "environmentVariableName": "CMS_URL"
+    },
+    {
+      "cloudFormationParameterName": "cmsCognitoUserPoolId",
+      "environmentVariableName": "CMS_COGNITO_USER_POOL_ID"
+    }
+  ]
+}

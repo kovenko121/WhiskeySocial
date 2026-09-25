@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "auth": {
+      "whiskeysocial1f41304e": [
+        "create",
+        "read",
+        "update"
+      ]
+    },
+    "storage": {
+      "whiskeysocials3": [
+        "create",
+        "read"
+      ],
+      "User:@model(appsync)": [
+        "create",
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "googleMapsApiKey",
+      "environmentVariableName": "GOOGLE_MAPS_API_KEY"
+    },
+    {
+      "cloudFormationParameterName": "token",
+      "environmentVariableName": "TOKEN"
+    }
+  ]
+}

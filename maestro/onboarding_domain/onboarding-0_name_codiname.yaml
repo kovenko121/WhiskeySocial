@@ -1,0 +1,60 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/onboarding_domain/onboarding_0_name-codiname'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- assertVisible: "Profile Info"
+- assertVisible: "We need some information to help users find you\non Whiskey Social®"
+- assertVisible:
+    id: "home"
+- tapOn:
+    id: "first-name"
+- runFlow:
+    when:
+      true: ${ORIGIN == 'apple'}
+    commands:
+      - longPressOn:
+          id: "first-name"
+      - tapOn: 'Select All'
+      - tapOn: 'Cut'
+- inputText: "digite primeiro nome"
+- tapOn:
+    id: 'Done'
+- tapOn:
+    id: "last-name"
+- runFlow:
+    when:
+      true: ${ORIGIN == 'apple'}
+    commands:
+      - longPressOn:
+          id: "last-name"
+      - tapOn: 'Select All'
+      - tapOn: 'Cut'
+- inputText: 'digite ultimo nome'
+- tapOn: 
+    id: 'Done'
+- tapOn:
+    id: "username"
+- inputRandomText:
+    length: 6 
+- tapOn: 
+    id: 'Done'
+# - copyTextFrom: 
+#     id: "username" # copiando um dado escolhido no maestro para uso em outro lugar
+# - inputText: ${maestro.copiedText} (colando o username em outro arquivo)
+
+- assertVisible: "I agree to the Terms & Conditions and Privacy Policy."
+- tapOn: "checkbox, not checked"
+- tapOn:
+    id: "continue"
+- waitForAnimationToEnd:
+    timeout: 3000
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

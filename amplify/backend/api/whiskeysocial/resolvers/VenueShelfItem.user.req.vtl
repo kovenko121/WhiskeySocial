@@ -1,0 +1,10 @@
+#if( $util.isNullOrBlank($ctx.source.userId) )
+  #return
+#end
+{
+  "version": "2018-05-29",
+  "operation": "GetItem",
+  "key": {
+    "id": $util.dynamodb.toDynamoDBJson($ctx.source.userId)
+  }
+}

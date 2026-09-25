@@ -1,0 +1,63 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/articles_domain/articles'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------------------------------
+- tapOn:
+    id: "search"
+- scrollUntilVisible:
+    centerElement: true
+    element: "Latest Articles"
+    direction: "DOWN"
+- tapOn:
+    id: "go-to-articles"
+- tapOn: " Favorites"
+- tapOn: "Water"
+- tapOn: " Favorites"
+- tapOn:
+    id: "all"
+- tapOn:
+    id: "share"
+- tapOn:
+    id: "UICloseButtonBackground"
+- tapOn:
+    id: "navigation-back"
+- tapOn: "Agua faz bem  Water"
+- tapOn: ""
+- tapOn:
+    point: "90%,59%"
+- swipe:
+    start: "49%,90%"
+    end: "48%,35%"
+    duration: 1264
+- swipe:
+    start: "55%,80%"
+    end: "57%,31%"
+    duration: 1154
+- tapOn: "Return to Articles"
+- tapOn:
+    id: "navigation-back"
+- swipe:
+    start: "48%,10%"
+    end: "40%,94%"
+    duration: 2572
+- swipe:
+    start: "53%,19%"
+    end: "53%,50%"
+    duration: 1050
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "home"
+
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

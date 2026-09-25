@@ -1,0 +1,155 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/posts_domain/posts_create_user'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#---------- Post 01 com check in paera premio checkin -----------------------------
+- tapOn:
+    id: "what-are-you-drinking-today"
+- inputText: "Testando inserção textos, pessoas e locais"
+- tapOn:
+    id: "Done"
+- tapOn: 
+    id: "whiskey"
+- scrollUntilVisible:
+    element: 
+      id: "10th-street-single-barrel-sinlge-malt"
+    direction: DOWN
+    speed: 60
+- tapOn:
+    id: "10th-street-single-barrel-sinlge-malt"
+- waitForAnimationToEnd:
+    timeout: 500
+- tapOn: 
+    id: "tag-person"
+- tapOn:
+    id: "search-user"
+- inputText: "Fabio Domingues"
+- tapOn:
+    id: "Done"
+- tapOn: .*Fábio Domingues @fabio.*
+- swipe:
+    start: "85%,37%"
+    end: "20%,36%"
+    duration: 1642
+- tapOn: 
+    id: "check-in"
+- tapOn:
+    id: "search-user"
+- inputText: "Dsadadas"
+- tapOn:
+    id: "Done"
+- tapOn: "Dsadadas Rua Ivo Stengler 713, Cascavel, Pr"
+- tapOn:
+    id: "share"
+- runFlow: 
+    when:
+      visible: "Congratulations"
+    commands:
+      - runFlow: '../activity_domain/congratulations.yaml'
+
+#---------- Post 02 para premio post criado -----------------------------
+- tapOn:
+    id: "what-are-you-drinking-today"
+- inputText: "Testando inserção, depois excluindo"
+- tapOn:
+    id: "Done"
+- tapOn: 
+    id: "photo"
+- tapOn: " Upload Picture"
+- "scroll"
+- "scroll"
+- tapOn: "Photo, 12 March 2011, 21:17"
+- tapOn: "Choose"
+- tapOn: 
+    id: "whiskey"
+- scrollUntilVisible:
+    element: 
+      id: "1176-Straight-Bourbon"
+    direction: DOWN
+    speed: 60
+- tapOn:
+    id: "1176-Straight-Bourbon"
+- waitForAnimationToEnd:
+    timeout: 500
+- tapOn: 
+    id: "tag-person"
+- tapOn:
+    id: "search-user"
+- inputText: "Fabio Domingues"
+- tapOn:
+    id: "Done"
+- tapOn: .*Fábio Domingues @fabio.*
+- tapOn:
+    id: "share"
+#-------------Post 03 com Check in------------------------
+# - tapOn:
+#     id: "what-are-you-drinking-today"
+# - inputText: "Testando inserção textos, imagens, uísques, pessoas e locais"
+# - tapOn:
+#     id: "Done"
+# - tapOn: 
+#     id: "photo"
+# - tapOn: " Upload Picture"
+# - "scroll"
+# - "scroll"
+# - tapOn: "Photo, 12 March 2011, 21:17"
+# - tapOn: "Choose"
+# - tapOn: 
+#     id: "whiskey"
+# - scrollUntilVisible:
+#     element: 
+#       id: "10th-street-single-barrel-sinlge-malt"
+#     direction: DOWN
+#     speed: 60
+# - tapOn:
+#     id: "10th-street-single-barrel-sinlge-malt"
+# - waitForAnimationToEnd:
+#     timeout: 500
+# - tapOn: 
+#     id: "tag-person"
+# - tapOn:
+#     id: "search-user"
+# - inputText: "Fabio Domingues"
+# - tapOn:
+#     id: "Done"
+# - tapOn: .*Fábio Domingues @fabio.*
+# - swipe:
+#     start: "85%,37%"
+#     end: "20%,36%"
+#     duration: 1642
+# - tapOn: " Tag Place"
+# - tapOn:
+#     id: "search-user"
+# - inputText: "Dsadadas"
+# - tapOn:
+#     id: "Done"
+# - tapOn: "Dsadadas Rua Ivo Stengler 713, Cascavel, Pr"
+# - tapOn:
+#     id: "share"
+- waitForAnimationToEnd:
+    timeout: 2500   
+- runFlow: 
+    when:
+      notVisible: "Congratulations"
+    commands:
+      - runFlow: '../auth_domain/logout.yaml'
+      - tapOn: 
+          id: "continue"
+      - runFlow: '../auth_domain/login_google.yaml'
+- runFlow: 
+    when:
+      visible: "Congratulations"
+    commands:
+      - runFlow: '../activity_domain/congratulations.yaml'
+
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording
+

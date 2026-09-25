@@ -1,0 +1,54 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/rewards_empty'
+---
+#----------- acessando Rewrads pela primeira vez--------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- tapOn:
+    id: "reward"
+- runFlow:
+    when: 
+      visible: "Welcome to WS Rewards!"
+    commands:
+      - tapOn:
+          id: "start-now!"
+- assertVisible: "WS Rewards"
+- runFlow:
+    when:
+      visible:
+        id: "reward-not-unlocked-yet"
+    commands:
+      - scrollUntilVisible:
+          element:
+            id: "reward-not-unlocked-yet"
+          direction: "RIGHT"
+          speed: 80
+      - runFlow:
+          when:
+            visible:
+              id: "reward-not-unlocked-yet"
+          commands:
+            - scrollUntilVisible:
+                element:
+                  id: "reward-not-unlocked-yet"
+                direction: "RIGHT"
+                speed: 80
+- swipe:
+    start: "2%,55%"
+    end: "96%,55%"
+    duration: 1902
+- swipe:
+    start: "10%,57%"
+    end: "87%,57%"
+    duration: 1626
+- tapOn:
+    id: "navigation-back"
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

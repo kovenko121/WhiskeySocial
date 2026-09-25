@@ -1,0 +1,26 @@
+appId: app.whiskeysocial
+---
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../settings_domain/customize_banner_my_collection.yaml'
+- runFlow: 'add_whiskey_my_collection.yaml'
+- runFlow: 'edit_whiskey_my_collection.yaml'
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../pours_domain/main.yaml'
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../my_wishlist_domain/main.yaml'
+
+- runFlow: 'exclude_whiskey_my_collection.yaml'
+- runFlow:
+    when:
+      true: ${FULL_FLOW === 'true'}
+    commands:
+      - runFlow: '../discover_domain/main.yaml'

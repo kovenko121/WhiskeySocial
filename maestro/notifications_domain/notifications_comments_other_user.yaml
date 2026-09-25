@@ -1,0 +1,57 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/notifications_comments_other_user'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- scrollUntilVisible:
+    element: 
+      id: "comment"
+    direction: DOWN
+    centerElement: true
+- tapOn: 
+    id: "comment"
+    index: 0
+- longPressOn:
+    id: .*comment-as-.*
+- inputText: "Beber agua faz mal, escolha um Uísque no (Whiskey Social)"
+- tapOn: "Publish"
+- swipe:
+    start: "51%,20%"
+    end: "46%,83%"
+    duration: 1700
+- tapOn: 
+    id: "comment"
+    index: 0
+- longPressOn:
+    id: .*comment-as-.*
+- inputText: "Beba (Whiskey Social)"
+- tapOn: "Publish"
+- swipe:
+    start: "51%,20%"
+    end: "46%,83%"
+    duration: 1700
+- tapOn: 
+    id: "comment"
+    index: 0
+- longPressOn:
+    id: .*comment-as-.*
+- inputText: "Beber agua faz mal, beba cachaça"
+- tapOn: "Publish"
+- swipe:
+    start: "51%,20%"
+    end: "46%,83%"
+    duration: 1700
+- swipe:
+    start: "50%,15%"
+    end: "48%,69%"
+    duration: 2181
+
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

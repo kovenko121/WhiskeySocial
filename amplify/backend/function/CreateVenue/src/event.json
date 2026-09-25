@@ -1,0 +1,16 @@
+{
+  "arguments": {
+    "input": {
+      "username": "a",
+      "venueName": "TesteAppSync",
+      "venuePhone": "45 99838197",
+      "venueAddressCountry": "a",
+      "venueAddressStreet": "rua francisco de assis",
+      "venueAddressCity": "Cascavel",
+      "venueAddressState": "PR",
+      "token": "dfeae8aa54d84ccd7e946b0820e7d1655aba9a41",
+      "number": "719",
+      "bio": "BIO TEste"
+    }
+  }
+}

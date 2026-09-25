@@ -1,0 +1,20 @@
+appId: app.teetimetrainer
+env:
+  RECORD_FILE: 'assets/records/auth_domain/logout'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- tapOn:
+    id: "settings"
+- tapOn:
+    id: "logout"
+- waitForAnimationToEnd:
+    timeout: 4000
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

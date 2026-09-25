@@ -1,0 +1,1955 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+enum ConfirmationCodeOperation {
+  SIGN_IN
+}
+
+type SearchableVenueConnection {
+  items: [User]
+  nextToken: String
+  total: Int
+}
+
+type SearchableWhiskeysConnection {
+  items: [UserWhiskeys]
+  nextToken: String
+  total: Int
+}
+
+input GeoPointInput {
+  lat: Float!
+  lon: Float!
+}
+
+input GeoPointQueryInput {
+  geoPoint: GeoPointInput!
+  radius: Float!
+}
+
+input FindVenuesInput {
+  byGeoPoint: GeoPointQueryInput
+  limit: Int
+  nextToken: String
+  from: Int
+}
+
+type VenueShelfItem @aws_api_key @aws_cognito_user_pools {
+  userId: ID!
+  user: User
+}
+
+type VenueShelfConnection @aws_api_key @aws_cognito_user_pools {
+  items: [VenueShelfItem]
+  nextToken: String
+  total: Int
+}
+
+input FindWhiskeysInput {
+  byGeoPoint: GeoPointInput!
+  byWhiskeyId: String
+  limit: Int
+  nextToken: String
+  from: Int
+}
+
+input S3ObjectInput {
+  bucket: String!
+  key: String!
+  region: String!
+  width: Int
+  height: Int
+}
+
+input CreateVenueInput {
+  username: String!
+  venueName: String!
+  venuePhone: String
+  venueAddressCountry: String
+  venueAddressCity: String!
+  venueAddressStreet: String!
+  venueAddressNumber: String
+  venueAddressState: String!
+  venueWebsite: String
+  externalId: String
+  profilePicture: S3ObjectInput
+  coverPicture: S3ObjectInput
+  bio: String
+  token: String!
+}
+
+input CreateBrandV2Input {
+  username: String!
+  brandName: String!
+  brandDescription: String
+  brandLogo: S3ObjectInput
+  brandCoverImage: S3ObjectInput
+  brandWebsite: String
+  brandCountry: String
+  brandFoundedYear: Int
+  brandStory: String
+  bio: String
+  profilePicture: S3ObjectInput
+  coverPicture: S3ObjectInput
+  externalId: String
+  mobileEmail: String # Optional: Email for mobile app Cognito user
+  cmsEmail: String # Optional: Email for CMS brand owner access
+  token: String!
+}
+
+input UpdateVenueInput {
+  id: ID!
+  venueName: String
+  venuePhone: String
+  venueAddressCountry: String
+  venueAddressCity: String
+  venueAddressStreet: String
+  venueAddressNumber: String
+  venueAddressState: String
+  venueWebsite: String
+  venueHours: String
+  externalId: String
+  profilePicture: S3ObjectInput
+  coverPicture: S3ObjectInput
+  bio: String
+  archived: Boolean
+  token: String!
+}
+
+input DeleteVenueInput {
+  id: ID!
+  token: String!
+}
+
+type CognitoUserInfo {
+  email: String @auth(rules: [{ allow: private }])
+  username: String @auth(rules: [{ allow: private }])
+  userStatus: String @auth(rules: [{ allow: private }])
+}
+
+type SignInMethods {
+  email: String!
+  methods: [String!]!
+  hasNativeAccount: Boolean!
+  nativeStatus: String
+}
+
+type Query {
+  findVenues(input: FindVenuesInput!): SearchableVenueConnection
+  findWhiskeys(input: FindWhiskeysInput!): SearchableWhiskeysConnection
+  findVenuesStockingWhiskey(input: FindWhiskeysInput!): VenueShelfConnection
+    @aws_api_key
+    @aws_cognito_user_pools
+  getCognitoUserFromUsername(userId: ID!): CognitoUserInfo
+    @function(name: "getCognitoUserFromUsername-${env}")
+    @auth(rules: [{ allow: private }])
+  signInMethodsForEmail(email: String!): SignInMethods
+    @function(name: "SignInMethodsForEmail-${env}")
+}
+
+type CMSUserInvitationResult {
+  success: Boolean! @auth(rules: [{ allow: private }])
+  authId: String @auth(rules: [{ allow: private }])
+  message: String! @auth(rules: [{ allow: private }])
+}
+
+type CreateCMSUserResult {
+  statusCode: Int! @auth(rules: [{ allow: private }])
+  success: Boolean! @auth(rules: [{ allow: private }])
+  message: String! @auth(rules: [{ allow: private }])
+  cmsUserId: String @auth(rules: [{ allow: private }])
+  authId: String @auth(rules: [{ allow: private }])
+}
+
+type UpdateCMSUserWithAuthResult {
+  statusCode: Int! @auth(rules: [{ allow: private }])
+  success: Boolean! @auth(rules: [{ allow: private }])
+  message: String! @auth(rules: [{ allow: private }])
+  updatedUser: CMSUser @auth(rules: [{ allow: private }])
+}
+
+type ResetCMSUserPasswordResult {
+  statusCode: Int! @auth(rules: [{ allow: private }])
+  success: Boolean! @auth(rules: [{ allow: private }])
+  message: String! @auth(rules: [{ allow: private }])
+}
+
+type DeleteCMSUserWithAuthResult {
+  statusCode: Int! @auth(rules: [{ allow: private }])
+  success: Boolean! @auth(rules: [{ allow: private }])
+  message: String! @auth(rules: [{ allow: private }])
+  deletedUserId: String @auth(rules: [{ allow: private }])
+}
+
+type DeleteClubPostAdminResult {
+  success: Boolean! @auth(rules: [{ allow: private }])
+  postId: ID @auth(rules: [{ allow: private }])
+  message: String @auth(rules: [{ allow: private }])
+}
+
+# DeleteClubAdmin mutation types - Added for ticket #427
+# Note: Named "deleteClubAdmin" to avoid conflict with auto-generated "deleteClub" from @model
+type DeleteClubAdminDeletedCounts {
+  members: Int! @auth(rules: [{ allow: private }])
+  whiskeys: Int! @auth(rules: [{ allow: private }])
+  posts: Int! @auth(rules: [{ allow: private }])
+}
+
+type DeleteClubAdminResult {
+  success: Boolean! @auth(rules: [{ allow: private }])
+  clubId: ID @auth(rules: [{ allow: private }])
+  clubName: String @auth(rules: [{ allow: private }])
+  deletedCounts: DeleteClubAdminDeletedCounts @auth(rules: [{ allow: private }])
+  message: String @auth(rules: [{ allow: private }])
+}
+
+input DeleteClubAdminInput {
+  clubId: ID!
+  token: String!
+}
+
+# DeleteAdCampaignAdmin mutation types - Added for ticket #605
+# Note: Named "deleteAdCampaignAdmin" to avoid conflict with auto-generated "deleteAdCampaign" from @model
+type DeleteAdCampaignAdminDeletedCounts {
+  eventRecords: Int! @auth(rules: [{ allow: private }])
+  s3Objects: Int! @auth(rules: [{ allow: private }])
+}
+
+type DeleteAdCampaignAdminResult {
+  success: Boolean! @auth(rules: [{ allow: private }])
+  campaignId: ID @auth(rules: [{ allow: private }])
+  campaignName: String @auth(rules: [{ allow: private }])
+  deletedCounts: DeleteAdCampaignAdminDeletedCounts @auth(rules: [{ allow: private }])
+  message: String @auth(rules: [{ allow: private }])
+}
+
+input DeleteAdCampaignAdminInput {
+  campaignId: ID!
+  token: String!
+}
+
+type Mutation {
+  sendCMSUserInvitation(
+    email: String!
+    role: CMSUserRole!
+    brandIds: [String]
+  ): CMSUserInvitationResult
+    @function(name: "SendCMSUserInvitation-${env}")
+    @auth(rules: [{ allow: private }])
+  createCMSUserWithAuth(
+    email: String!
+    role: CMSUserRole!
+    brandId: String
+  ): CreateCMSUserResult
+    @function(name: "CreateCMSUser-${env}")
+    @auth(rules: [{ allow: private }])
+  updateCMSUserWithAuth(
+    userId: String!
+    email: String
+    role: String
+    isActive: Boolean
+    brandIds: [String]
+  ): UpdateCMSUserWithAuthResult
+    @function(name: "UpdateCMSUser-${env}")
+    @auth(rules: [{ allow: private }])
+  resetCMSUserPassword(userId: String!): ResetCMSUserPasswordResult
+    @function(name: "UpdateCMSUser-${env}")
+    @auth(rules: [{ allow: private }])
+  deleteCMSUserWithAuth(userId: String!): DeleteCMSUserWithAuthResult
+    @function(name: "UpdateCMSUser-${env}")
+    @auth(rules: [{ allow: private }])
+  sendConfirmationCode(
+    email: String!
+    operation: ConfirmationCodeOperation!
+  ): Boolean @function(name: "SendConfirmationCodePostmark-${env}")
+  verifyConfirmationCode(
+    email: String!
+    operation: ConfirmationCodeOperation!
+    code: String!
+  ): Boolean @function(name: "VerifyConfirmationCode-${env}")
+  createUser(
+    id: ID!
+    username: String!
+    firstName: String
+    lastName: String
+    venueName: String
+    phone: String
+    street: String
+    city: String
+    state: String
+    number: String
+    geoPoint: GeoPointInput
+    userType: UserType!
+    venueMenu: S3ObjectInput
+    brandName: String
+    brandDescription: String
+    brandWebsite: String
+    brandCountry: String
+    brandFoundedYear: Int
+    brandStory: String
+  ): ID @function(name: "CreateUser-${env}") @auth(rules: [{ allow: private }])
+  followUser(user: ID!): Boolean
+    @function(name: "FollowUser-${env}")
+    @auth(rules: [{ allow: private }])
+  unfollowUser(user: ID!): Boolean
+    @function(name: "UnfollowUser-${env}")
+    @auth(rules: [{ allow: private }])
+  importWhiskeysByCSV(fileKey: String!): Boolean
+    @function(name: "ImportWhiskeysByCSV-${env}")
+  importUserCollectionByCSV(fileKey: String!): CollectionImportResult
+    @function(name: "ImportUserCollectionByCSV-${env}")
+    @auth(rules: [{ allow: private }])
+  deleteUserNotifications: Boolean
+    @function(name: "DeleteUserNotifications-${env}")
+    @auth(rules: [{ allow: private }])
+  setUserIsOnRewards: Boolean
+    @function(name: "SetUserIsOnRewards-${env}")
+    @auth(rules: [{ allow: private }])
+  createVenue(input: CreateVenueInput!): User
+    @function(name: "CreateVenue-${env}")
+    @auth(rules: [{ allow: private }])
+  transferVenue(id: ID!, email: String!, token: String!): String
+    @function(name: "TransferVenue-${env}")
+    @auth(rules: [{ allow: private }])
+  transferBrand(id: ID!, email: String!, owner: String!): String
+    @function(name: "TransferBrand-${env}")
+    @auth(rules: [{ allow: private }])
+  updateVenue(input: UpdateVenueInput): User
+    @function(name: "UpdateVenue-${env}")
+    @auth(rules: [{ allow: private }])
+  deleteVenue(input: DeleteVenueInput): User
+    @function(name: "DeleteVenue-${env}")
+    @auth(rules: [{ allow: private }])
+  createBrandV2(input: CreateBrandV2Input!): User
+    @function(name: "CreateBrandV2-${env}")
+    @auth(rules: [{ allow: private }])
+  updatePostLikes(input: UpdatePostLikesInput!): UpdatePostLikesResult
+    @function(name: "UpdatePostLikes-${env}")
+    @auth(rules: [{ allow: private }])
+  deleteClubPostAdmin(postId: ID!): DeleteClubPostAdminResult
+    @function(name: "DeleteClubPostsAdmin-${env}")
+    @auth(rules: [{ allow: private }])
+  deleteClubAdmin(input: DeleteClubAdminInput!): DeleteClubAdminResult
+    @function(name: "DeleteClub-${env}")
+    @auth(rules: [{ allow: private }])
+  deleteAdCampaignAdmin(input: DeleteAdCampaignAdminInput!): DeleteAdCampaignAdminResult
+    @function(name: "DeleteAdCampaign-${env}")
+    @auth(rules: [{ allow: private }])
+  sendMessage(input: SendMessageInput!): SendMessageOutput
+    @function(name: "SendMessage-${env}")
+    @auth(rules: [{ allow: private }])
+  updateMessageRequest(input: UpdateMessageRequestInput!): UpdateMessageRequestOutput
+    @function(name: "UpdateMessageRequest-${env}")
+    @auth(rules: [{ allow: private }])
+  markMessagesAsRead(input: MarkMessagesAsReadInput!): MarkMessagesAsReadOutput
+    @function(name: "MarkMessagesAsRead-${env}")
+    @auth(rules: [{ allow: private }])
+  softDeleteMessage(input: SoftDeleteMessageInput!): SoftDeleteMessageOutput
+    @function(name: "DeleteMessage-${env}")
+    @auth(rules: [{ allow: private }])
+  identifyWhiskeyFromImage(input: IdentifyWhiskeyInput!): IdentifyWhiskeyResult
+    @function(name: "IdentifyWhiskeyFromImage-${env}")
+    @auth(rules: [{ allow: private }])
+  deleteScanImage(input: DeleteScanImageInput!): DeleteScanImageResult
+    @function(name: "DeleteScanImage-${env}")
+    @auth(rules: [{ allow: private }])
+}
+
+# AI Whiskey Bottle Recognition Feature
+input IdentifyWhiskeyInput {
+  imageKey: String!
+}
+
+type ExtractedLabelInfo {
+  brand: String @auth(rules: [{ allow: private }])
+  name: String @auth(rules: [{ allow: private }])
+  fullLabelText: String @auth(rules: [{ allow: private }])
+  age: Int @auth(rules: [{ allow: private }])
+  proof: Float @auth(rules: [{ allow: private }])
+  type: String @auth(rules: [{ allow: private }])
+  distillery: String @auth(rules: [{ allow: private }])
+  origin: String @auth(rules: [{ allow: private }])
+  visionConfidence: Float @auth(rules: [{ allow: private }])
+}
+
+type WhiskeyMatch {
+  whiskeyId: ID! @auth(rules: [{ allow: private }])
+  name: String @auth(rules: [{ allow: private }])
+  fullName: String @auth(rules: [{ allow: private }])
+  brand: String @auth(rules: [{ allow: private }])
+  age: Int @auth(rules: [{ allow: private }])
+  proof: Float @auth(rules: [{ allow: private }])
+  type: String @auth(rules: [{ allow: private }])
+  distillery: String @auth(rules: [{ allow: private }])
+  picture: S3Object @auth(rules: [{ allow: private }])
+  confidence: Float! @auth(rules: [{ allow: private }])
+}
+
+type IdentifyWhiskeyResult {
+  isWhiskeyDetected: Boolean! @auth(rules: [{ allow: private }])
+  extractedInfo: ExtractedLabelInfo @auth(rules: [{ allow: private }])
+  matches: [WhiskeyMatch] @auth(rules: [{ allow: private }])
+  rateLimitExceeded: Boolean @auth(rules: [{ allow: private }])
+  error: String @auth(rules: [{ allow: private }])
+  message: String @auth(rules: [{ allow: private }])
+}
+
+input DeleteScanImageInput {
+  imageKey: String!
+}
+
+type DeleteScanImageResult {
+  success: Boolean! @auth(rules: [{ allow: private }])
+  error: String @auth(rules: [{ allow: private }])
+}
+
+input SendMessageInput {
+  recipientId: ID!
+  text: String!
+}
+
+type SendMessageOutput {
+  messageId: ID! @auth(rules: [{ allow: private }])
+  conversationId: ID! @auth(rules: [{ allow: private }])
+  text: String! @auth(rules: [{ allow: private }])
+  senderId: ID! @auth(rules: [{ allow: private }])
+  createdAt: AWSDateTime! @auth(rules: [{ allow: private }])
+  isNewConversation: Boolean! @auth(rules: [{ allow: private }])
+}
+
+input UpdateMessageRequestInput {
+  participantId: ID!
+  action: MessageRequestStatus!
+}
+
+type UpdateMessageRequestOutput {
+  success: Boolean! @auth(rules: [{ allow: private }])
+  participantId: ID! @auth(rules: [{ allow: private }])
+  conversationId: ID! @auth(rules: [{ allow: private }])
+  requestStatus: MessageRequestStatus! @auth(rules: [{ allow: private }])
+}
+
+input MarkMessagesAsReadInput {
+  conversationId: ID!
+}
+
+type MarkMessagesAsReadOutput {
+  success: Boolean! @auth(rules: [{ allow: private }])
+  conversationId: ID! @auth(rules: [{ allow: private }])
+  readAt: AWSDateTime! @auth(rules: [{ allow: private }])
+  updatedMessageCount: Int! @auth(rules: [{ allow: private }])
+}
+
+input SoftDeleteMessageInput {
+  messageId: ID!
+  deleteForEveryone: Boolean!
+}
+
+type SoftDeleteMessageOutput {
+  success: Boolean! @auth(rules: [{ allow: private }])
+  messageId: ID! @auth(rules: [{ allow: private }])
+  conversationId: ID! @auth(rules: [{ allow: private }])
+  deleteForEveryone: Boolean! @auth(rules: [{ allow: private }])
+}
+
+type Subscription {
+  onSendMessage(conversationId: ID!): SendMessageOutput
+    @aws_subscribe(mutations: ["sendMessage"])
+    @aws_cognito_user_pools
+  onMarkMessagesAsRead(conversationId: ID!): MarkMessagesAsReadOutput
+    @aws_subscribe(mutations: ["markMessagesAsRead"])
+    @aws_cognito_user_pools
+  onSoftDeleteMessage(conversationId: ID!): SoftDeleteMessageOutput
+    @aws_subscribe(mutations: ["softDeleteMessage"])
+    @aws_cognito_user_pools
+}
+
+type S3Object {
+  bucket: String!
+  key: String!
+  region: String!
+  width: Int
+  height: Int
+}
+
+enum UserType {
+  VENUE
+  PERSON
+  BRAND
+}
+
+enum ModerationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  ERROR
+}
+
+enum VenueRequestStatus {
+  PENDING
+  REJECTED
+  FINISHED
+}
+
+type Settings {
+  name: String!
+  description: String!
+  value: String!
+}
+
+type GeoPoint {
+  lat: Float!
+  lon: Float!
+}
+
+type User
+  @model(
+    mutations: { create: null, update: "updateUser", delete: "deleteUser" }
+  )
+  @searchable
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      # We need this private rule to allow the lambda functions to create users for the mobile app, as owner isn't enough because at sign up they don't have an owner yet
+      { allow: private, operations: [create, read] }
+      { allow: owner, operations: [create, read, update, delete] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      # BrandOwner/BrandEditor only get read+update, not create/delete
+      # Note: Due to Amplify limitation, nullAllowedFields won't be populated
+      # for these groups. The frontend filters out null values as a workaround.
+      {
+        allow: groups
+        groups: ["BrandOwner", "BrandEditor"]
+        provider: userPools
+        operations: [read, update]
+      }
+    ]
+  ) {
+  id: ID!
+  personFirstName: String
+  personLastName: String
+  personFullName: String
+  venueName: String
+  venueSearchName: String
+  venuePhone: String
+  venueAddressCountry: String
+  venueAddressCity: String
+  venueAddressStreet: String
+  venueAddressNumber: String
+  venueAddressState: String
+  venueAddressGeo: GeoPoint
+  venueCalculatedRating: Int
+  venueMenu: S3Object
+  venueCheckinsCount: Int
+  venueWebsite: String
+  venueHours: String
+  brandName: String
+  brandSearchName: String
+  brandDescription: String
+  brandLogo: S3Object
+  brandCoverImage: S3Object
+  brandWebsite: String
+  brandCountry: String
+  brandFoundedYear: Int
+  brandStory: String
+  brandId: ID @index(name: "byBrandVenues")
+  userType: UserType!
+  username: String! @index(name: "byUsername")
+  profilePicture: S3Object
+  profilePictureKey: String @index(name: "byProfilePictureKey")
+  profilePictureModerationStatus: ModerationStatus
+  coverPicture: S3Object
+  coverPictureKey: String @index(name: "byCoverPictureKey")
+  coverPictureModerationStatus: ModerationStatus
+  bio: String
+  notificationSettings: [Settings]
+  securitySettings: [Settings]
+  deleted: Boolean
+  archived: Boolean
+  isMyCollectionPublic: Boolean
+  whiskeys: [UserWhiskeys] @hasMany(indexName: "byUserWhiskey")
+  reviews: [Review] @hasMany(indexName: "byUser")
+  likedPosts: [Post] @manyToMany(relationName: "userLikes")
+  posts: [Post] @hasMany(indexName: "byPostAuthor")
+  comments: [Comment] @hasMany(indexName: "byCommentAuthor")
+  wishList: [Whiskey] @manyToMany(relationName: "userWishListWhiskeys")
+  trendingWhiskeys: [UserTrendingWhiskeys]
+    @hasMany(indexName: "byUserTrendingWhiskey")
+  followers: [String]
+  following: [String]
+  expoTokens: [String]
+  relatedNotifications: [Notification] @hasMany(indexName: "byRelatedUserId")
+  reports: [Report] @hasMany
+  rewards: [UserReward] @hasMany(indexName: "byReward")
+  isOnRewards: Boolean
+  favoriteGuides: [Guides] @manyToMany(relationName: "userFavoriteGuides")
+  myPours: [UserPours] @hasMany(indexName: "byUserPours")
+  brandWhiskeys: [Whiskey] @hasMany(indexName: "byBrand")
+  brandVenues: [User] @hasMany(indexName: "byBrandVenues", fields: ["id"])
+  cmsUsers: [CMSUserBrand] @hasMany(indexName: "byBrandUser")
+  blockedUsers: [String]
+  toBeRedeemed: Boolean
+  externalId: String
+  clubMembers: [ClubMember] @hasMany(indexName: "byUserClubMember")
+  clubRequestsCreated: [ClubRequest] @hasMany(indexName: "byRequestedBy")
+  dmPrivacySetting: DMPrivacySetting
+  conversationParticipants: [ConversationParticipant]
+    @hasMany(indexName: "byUser")
+  messages: [Message] @hasMany(indexName: "bySender")
+}
+
+type UserPours
+  @model
+  @searchable
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+      { allow: owner, operations: [create, update, read, delete] }
+    ]
+  ) {
+  userId: ID! @index(name: "byUserPours", sortKeyFields: ["whiskeyFullName"])
+  user: User @belongsTo(fields: ["userId"])
+  whiskeyFullName: String
+  count: Int
+  whiskeyId: ID! @index(name: "byWhiskeyUserPours")
+  whiskey: Whiskey @belongsTo(fields: ["whiskeyId"])
+}
+
+type VenueRequest
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [create] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+    ]
+  ) {
+  id: ID!
+  fullName: String!
+  email: String!
+  venuePhone: String!
+  userId: String
+  venueId: String
+  venueName: String
+  username: String
+  venueAddressCountry: String
+  venueAddressCity: String
+  venueAddressStreet: String
+  venueAddressNumber: String
+  venueAddressState: String
+  venueWebsite: String
+  status: VenueRequestStatus
+}
+
+type UserWhiskeys
+  @model
+  @searchable
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+      { allow: owner, operations: [create, read, update, delete] }
+    ]
+  ) {
+  userId: ID! @index(name: "byUserWhiskey")
+  user: User @belongsTo(fields: ["userId"])
+  whiskeyId: ID! @index(name: "byWhiskeyUser")
+  whiskeyFullName: String
+  whiskey: Whiskey @belongsTo(fields: ["whiskeyId"])
+  geo: GeoPoint
+  proof: Float
+  proofType: ProofType
+  warehouse: String
+  purchaseYear: String
+  batch: String
+  rick: String
+  barrel: String
+  bottle: String
+  notes: String
+  singleBarrel: Boolean
+  storePick: String
+  age: String
+  style: String
+  whiskeyType: [WhiskeyType]
+  archived: Boolean
+}
+
+type UserTrendingWhiskeys
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+      { allow: owner, operations: [create, read, update, delete] }
+    ]
+  ) {
+  userId: ID! @index(name: "byUserTrendingWhiskey", sortKeyFields: ["count"])
+  user: User @belongsTo(fields: ["userId"])
+  whiskeyId: ID! @index(name: "byTrendingWhiskey", sortKeyFields: ["count"])
+  whiskey: Whiskey @belongsTo(fields: ["whiskeyId"])
+  count: Int
+}
+
+enum WhiskeyType {
+  BOURBON
+  RYE
+  AMERICAN
+  CANADIAN
+  IRISH
+  FLAVORED
+  JAPANESE
+  SINGLE_MALT_SCOTCH
+  SINGLE_MALT_AMERICAN
+  BLENDED_SCOTCH_AND_WO
+  TN_WHISKEY
+  WORLD
+  MALT
+  SCOTCH
+  TEQUILA
+  TEQUILA_REPOSADO
+  TEQUILA_ANEJO
+  VINTAGE_SPIRITS
+}
+
+enum ProofType {
+  NUMERIC
+  CASK_STRENGTH
+  BARREL_PROOF
+  FULL_PROOF
+}
+
+type WhiskeyAwards {
+  title: String!
+  year: Int!
+  picture: S3Object
+}
+
+type CollectionImportRowError {
+  row: Int! @auth(rules: [{ allow: private }])
+  message: String! @auth(rules: [{ allow: private }])
+}
+
+type CollectionImportResult {
+  successCount: Int! @auth(rules: [{ allow: private }])
+  errors: [CollectionImportRowError!]! @auth(rules: [{ allow: private }])
+}
+
+type Whiskey
+  @model
+  @searchable
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin", "BrandOwner", "BrandEditor"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  name: String @index
+  description: String
+  type: [WhiskeyType]
+  picture: S3Object
+  brandId: ID @index(name: "byBrand")
+  brandUser: User @belongsTo(fields: ["brandId"])
+  brand: String @index
+  brandPicture: S3Object
+  age: Int
+  calculatedRating: Float
+  awards: [WhiskeyAwards]
+  users: [UserWhiskeys] @hasMany(indexName: "byWhiskeyUser")
+  usersWhishList: [User] @manyToMany(relationName: "userWishListWhiskeys")
+  userTrendingWhiskeys: [UserTrendingWhiskeys]
+    @hasMany(indexName: "byTrendingWhiskey")
+  reviews: [Review] @hasMany(indexName: "byWhiskey")
+  userPours: [UserPours] @hasMany(indexName: "byWhiskeyUserPours")
+  distillery: String
+  origin: String
+  proof: Float
+  proofType: ProofType
+  batch: String
+  rick: String
+  barrel: String
+  bottle: String
+  storePick: String
+  fullName: String
+  distilleryTastingNotes: String
+  specialistChoice: Boolean
+  starterPick: Boolean
+  singleBarrel: Boolean
+  userSubmitted: Boolean
+  clubWhiskeys: [ClubWhiskey] @hasMany(indexName: "byWhiskeyClubWhiskey")
+}
+
+type FeatureFlags
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+    ]
+  ) {
+  id: ID!
+  key: String!
+  value: String!
+  # Optional allowlist of User ids (== Cognito sub). When empty/null the flag
+  # follows `value` for everyone; when populated the flag is ON only for these
+  # users and `value` is ignored — a targeted/soft rollout gate, not access control.
+  allowedUserIds: [String]
+}
+
+type AppConfig
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  key: String!
+  value: String!
+}
+
+type RewardCondition {
+  key: String
+  value: String
+}
+
+type Reward
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+    ]
+  ) {
+  id: ID!
+  title: String
+  description: String
+  photo: S3Object
+  isAvailable: Boolean
+  sizes: [String]
+  models: [String]
+  conditions: [RewardCondition]
+  users: [UserReward] @hasMany(indexName: "byUser")
+}
+
+type GuideTags
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  count: Int!
+}
+
+type Guides
+  @model
+  @searchable
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+    ]
+  ) {
+  id: ID!
+  title: String!
+  subtitle: String!
+  coverPhoto: S3Object!
+  tag: String!
+  body: [String]!
+  photos: [S3Object]!
+  users: [User] @manyToMany(relationName: "userFavoriteGuides")
+}
+
+type UserReward
+  @model(mutations: { create: null, update: "updateUserReward", delete: null })
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [read, update, create, delete]
+      }
+      { allow: owner, operations: [read] }
+    ]
+  ) {
+  id: ID!
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  userId: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userId"])
+  rewardId: ID! @index(name: "byReward")
+  reward: Reward @belongsTo(fields: ["rewardId"])
+  score: Int!
+  lastScoreUpdate: AWSDateTime!
+  isAlreadyViewed: Boolean
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  isRedeemed: Boolean
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  isCompleted: Boolean
+  trackingCode: String
+  service: String
+  size: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  model: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  fullName: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  email: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  address: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  city: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  state: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+  zipcode: String
+    @auth(
+      rules: [
+        { allow: owner, operations: [read, update] }
+        {
+          allow: groups
+          groups: ["Admin"]
+          provider: userPools
+          operations: [read, update, create, delete]
+        }
+      ]
+    )
+}
+
+enum ReviewRecommendationTags {
+  OAKY
+  FRUITY
+  NUTTY
+  BRINY
+  BUTTERY
+  SPICY
+  SMOKY
+  EARTHY
+  HERBAL
+  RICH
+  SILKY
+}
+
+type Review
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+      { allow: owner, operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  title: String
+  description: String
+  rating: Int!
+  recommendationTags: [ReviewRecommendationTags]
+  whiskey: Whiskey @belongsTo(fields: ["whiskeyId"])
+  whiskeyId: ID!
+    @index(name: "byWhiskey", sortKeyFields: ["specialistReview", "rating"])
+  userId: ID!
+    @index(name: "byUser")
+    @index(name: "byUserAndWhiskey", sortKeyFields: ["whiskeyId"])
+  user: User @belongsTo(fields: ["userId"])
+  specialistReview: Int
+  specialistName: String
+  specialistImage: S3Object
+}
+
+type Suggestion
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+    ]
+  ) {
+  barcode: String
+  name: String!
+  brand: String!
+  year: String
+  photo: S3Object
+  userId: String
+}
+
+type Comment
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [read, delete]
+      }
+      { allow: private, operations: [create, read, delete] }
+      {
+        allow: owner
+        # ownerField: "owner" - don't think this is needed since other owner rule works
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  text: String!
+  authorId: ID! @index(name: "byCommentAuthor")
+  author: User @belongsTo(fields: ["authorId"])
+  postId: ID! @index(name: "byPost")
+  post: Post @belongsTo(fields: ["postId"])
+}
+
+enum ReferenceType {
+  USER
+  WHISKEY
+}
+
+type Reference {
+  id: String!
+  externalId: String
+  name: String!
+  type: ReferenceType!
+}
+
+enum InlineTagType {
+  USER
+  VENUE
+  BRAND
+  WHISKEY
+}
+
+type InlineTag {
+  id: ID!
+  type: InlineTagType!
+  entityId: ID!
+  text: String!
+  startIndex: Int!
+  endIndex: Int!
+}
+
+input InlineTagInput {
+  id: ID!
+  type: InlineTagType!
+  entityId: ID!
+  text: String!
+  startIndex: Int!
+  endIndex: Int!
+}
+
+type Post
+  @model
+  @searchable
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [read, delete]
+      }
+      { allow: private, operations: [create, read] }
+      { allow: owner, operations: [create, read, update, delete] }
+    ]
+  ) {
+  id: ID!
+  description: String
+  authorId: ID!
+    @index(name: "byPostAuthor", sortKeyFields: ["createdAt"])
+    @index(name: "byAuthorAndClub", sortKeyFields: ["clubId"])
+  locationId: String
+  author: User @belongsTo(fields: ["authorId"])
+  photo: S3Object
+  photoKey: String @index(name: "byPhotoKey")
+  photoModerationStatus: ModerationStatus
+  photos: [S3Object]
+  photoKeys: [String]
+  photoWidths: [Int]
+  photoHeights: [Int]
+  comments: [Comment] @hasMany(indexName: "byPost")
+  likes: [User] @manyToMany(relationName: "userLikes")
+  likesCount: Int!
+  title: String
+  references: [Reference]
+  inlineTags: [InlineTag]
+  sharedPostId: ID @index(name: "bySharedPost")
+  sharedPost: Post @belongsTo(fields: ["sharedPostId"])
+  shareComment: String
+  sharesCount: Int
+  shares: [Post] @hasMany(indexName: "bySharedPost")
+  createdAt: AWSDateTime!
+  clubId: ID @index(name: "byPostClub", sortKeyFields: ["createdAt"])
+  clubIsPrivate: Boolean
+  club: Club @belongsTo(fields: ["clubId"])
+}
+
+enum NotificationTypes {
+  ACTIVITY
+  DISCOVERY
+  MYBAR
+  CLUB_REQUEST_APPROVED
+  CLUB_REQUEST_REJECTED
+  CLUB_MEMBER_REMOVED
+  CLUB_PROMOTED_TO_ADMIN
+  CLUB_JOIN_REQUEST
+  CLUB_POST_TAG
+  CLUB_POST_PINNED
+  CLUB_WHISKEY_ADDED
+  MESSAGE_REQUEST
+  DIRECT_MESSAGE
+}
+
+type Notification
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      { allow: owner, operations: [read, delete] }
+    ]
+  ) {
+  id: ID!
+  userId: ID! @index(name: "byUserId", sortKeyFields: ["createdAt"])
+  message: String!
+  link: String
+  relatedUserId: ID!
+    @index(name: "byRelatedUserId", sortKeyFields: ["createdAt"])
+  relatedUser: User! @belongsTo(fields: ["relatedUserId"])
+  primaryPicture: S3Object
+  secondaryPicture: S3Object
+  type: NotificationTypes!
+  createdAt: AWSDateTime!
+}
+
+enum AdType {
+  ACTIVITY
+  DISCOVERY
+  SPONSORED
+  ARTICLE
+}
+
+type AdCampaign
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  name: String!
+  startDate: String!
+  endDate: String!
+  isActive: Boolean
+  owner: String
+  url: String
+  picture: S3Object
+  type: AdType! @index(name: "byType")
+}
+
+enum ReportContentType {
+  POST
+  REVIEW
+  COMMENT
+}
+
+type Report
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: private, operations: [create, read] }
+    ]
+  ) {
+  id: ID!
+  reason: String!
+  description: String
+  reportedUserId: ID!
+  reportedUser: User @belongsTo(fields: ["reportedUserId"])
+  contentId: String!
+  contentType: ReportContentType!
+  createdAt: AWSDateTime!
+}
+
+type Event
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [read]
+      }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  campaign: String
+  interactions: Int
+  impressions: Int
+}
+
+input UpdatePostLikesInput {
+  userId: ID!
+  postId: ID!
+  action: PostLikeAction!
+}
+
+enum PostLikeAction {
+  like
+  unlike
+  sync
+}
+
+type UpdatePostLikesResult @model @auth(rules: [{ allow: private }]) {
+  success: Boolean!
+  message: String!
+  postId: ID!
+  userId: ID!
+  likeId: ID
+  likesCount: Int!
+}
+
+enum CMSUserRole {
+  Admin
+  BrandOwner
+  BrandEditor
+}
+
+type CMSUser
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin", "BrandOwner"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  authId: ID
+  email: String!
+  role: CMSUserRole!
+  brandIds: [String]
+  brands: [CMSUserBrand] @hasMany(indexName: "byCMSUser")
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  isActive: Boolean!
+  clubRequestsReviewed: [ClubRequest] @hasMany(indexName: "byReviewedBy")
+}
+
+type CMSUserBrand
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin", "BrandOwner"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  cmsUserId: ID! @index(name: "byCMSUser")
+  cmsUser: CMSUser @belongsTo(fields: ["cmsUserId"])
+  brandUserId: ID! @index(name: "byBrandUser")
+  brandUser: User @belongsTo(fields: ["brandUserId"])
+  assignedAt: AWSDateTime!
+  assignedBy: String # ID of user who made the assignment
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type AppVersion
+  @model
+  @auth(
+    rules: [
+      { allow: public, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  platform: String! # ios, android, or all
+  currentVersion: String! # Latest available version
+  minimumVersion: String! # Minimum required version
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+# Whiskey Clubs Feature - Added 2025-01-13
+enum ClubRole {
+  CLUBOWNERROLE
+  CLUBADMINROLE
+  CLUBMEMBERROLE
+}
+
+enum MemberStatus {
+  ACTIVE
+  PENDING
+  BLOCKED
+}
+
+type Club
+  @model
+  @searchable
+  @auth(
+    rules: [
+      { allow: private, operations: [read, update, delete] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  clubName: String!
+  searchName: String!
+  clubDetails: String
+  coverPhoto: String
+  profilePicture: String
+  isPrivate: Boolean!
+  createdBy: ID! @index(name: "byCreatedByClub", sortKeyFields: ["createdAt"])
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  pinnedPostId: ID
+  pinnedBy: ID
+  memberCount: Int!
+  whiskeyCount: Int
+  posts: [Post] @hasMany(indexName: "byPostClub")
+  clubWhiskeys: [ClubWhiskey] @hasMany(indexName: "byClubClubWhiskey")
+  clubMembers: [ClubMember] @hasMany(indexName: "byClubClubMember")
+  clubRequest: ClubRequest @hasOne(fields: ["id"])
+}
+
+type ClubMember
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [create, read, update, delete] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  clubId: ID! @index(name: "byClubClubMember", sortKeyFields: ["userId"])
+  userId: ID! @index(name: "byUserClubMember", sortKeyFields: ["clubId"])
+  role: ClubRole!
+  status: MemberStatus!
+  joinedAt: AWSDateTime
+  requestedAt: AWSDateTime!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  approvedBy: ID
+  promotedBy: ID
+  deletionType: String
+  user: User @belongsTo(fields: ["userId"])
+  club: Club @belongsTo(fields: ["clubId"])
+}
+
+type ClubWhiskey
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [create, read, update, delete] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  clubId: ID! @index(name: "byClubClubWhiskey", sortKeyFields: ["addedAt"])
+  whiskeyId: ID! @index(name: "byWhiskeyClubWhiskey", sortKeyFields: ["clubId"])
+  addedBy: ID!
+  addedAt: AWSDateTime!
+  notes: String
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  club: Club @belongsTo(fields: ["clubId"])
+  whiskey: Whiskey @belongsTo(fields: ["whiskeyId"])
+}
+
+enum ClubRequestStatus {
+  PENDING
+  REJECTED
+  APPROVED
+}
+
+type ClubRequest
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "requestedBy", operations: [create, read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  clubName: String!
+  description: String!
+  location: String
+  currentMemberCount: Int!
+  isPrivate: Boolean!
+  requestedBy: ID!
+    @index(name: "byRequestedBy", sortKeyFields: ["createdAt"])
+  status: ClubRequestStatus!
+    @index(name: "byStatus", sortKeyFields: ["createdAt"])
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  reviewedBy: ID
+    @index(name: "byReviewedBy", sortKeyFields: ["reviewedAt"])
+  reviewedAt: AWSDateTime
+  rejectionReason: String
+  createdClubId: ID
+  requestor: User @belongsTo(fields: ["requestedBy"])
+  reviewer: CMSUser @belongsTo(fields: ["reviewedBy"])
+  createdClub: Club @belongsTo(fields: ["createdClubId"])
+}
+
+# Direct Messaging Feature
+
+enum DMPrivacySetting {
+  EVERYONE
+  FOLLOWING
+  NONE
+}
+
+enum MessageRequestStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+}
+
+type Conversation
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "participantIds", operations: [read, update] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  participantIds: [ID!]!
+  participantKey: String!
+    @index(name: "byParticipants", queryField: "conversationByParticipants")
+  participants: [ConversationParticipant]
+    @hasMany(indexName: "byConversation")
+  messages: [Message] @hasMany(indexName: "byConversation")
+  lastMessageText: String
+  lastMessageSenderId: ID
+  lastMessageAt: AWSDateTime
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type ConversationParticipant
+  @model
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "userId", operations: [read, update, delete] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  conversationId: ID!
+    @index(name: "byConversation", sortKeyFields: ["userId"])
+  userId: ID! @index(name: "byUser", sortKeyFields: ["conversationId"])
+  user: User @belongsTo(fields: ["userId"])
+  conversation: Conversation @belongsTo(fields: ["conversationId"])
+  unreadCount: Int!
+  lastReadAt: AWSDateTime
+  isMuted: Boolean!
+  isDeleted: Boolean!
+  requestStatus: MessageRequestStatus!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Message
+  @model
+  @searchable
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [read, delete]
+      }
+      { allow: owner, ownerField: "participantIds", operations: [read] }
+      {
+        allow: owner
+        ownerField: "senderId"
+        operations: [read, update, delete]
+      }
+    ]
+  ) {
+  id: ID!
+  conversationId: ID!
+    @index(name: "byConversation", sortKeyFields: ["createdAt"])
+  conversation: Conversation @belongsTo(fields: ["conversationId"])
+  participantIds: [String]
+  senderId: ID! @index(name: "bySender", sortKeyFields: ["createdAt"])
+  sender: User @belongsTo(fields: ["senderId"])
+  text: String!
+  readAt: AWSDateTime
+  deletedBySender: Boolean
+  deletedForEveryone: Boolean
+  senderDeleted: Boolean
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+# ═══════════════════════════════════════════════════════════════
+# TASTING PASSPORT
+# Event-day passport: CMS-authored events/booths/pours (read-only to
+# the app) + per-attendee passport state (owner-scoped) + a live,
+# event-scoped bottle leaderboard.
+#
+# NOTE: the existing `Event` type is ad-campaign analytics — unrelated.
+# These models are intentionally prefixed `Tasting*` to avoid it.
+# ═══════════════════════════════════════════════════════════════
+
+enum TastingEventStatus {
+  DRAFT # being built in CMS, invisible to the app
+  SCHEDULED # finalized; publishAt holds the go-live time
+  PUBLISHED # live in the app now
+  ARCHIVED # past / hidden
+}
+
+type TastingEvent
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      # Event content is browsable in guest mode (API key) — the passport is a
+      # sign-up funnel at the doors, so the roster must not need an account.
+      # Only the curated content is public; every passport state model stays owner-scoped.
+      { allow: public, operations: [read] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  title: String!
+  # Free text: the LOCATION line. The date used to live here too; it now has its
+  # own fields below, and this stays as written for venue and any loose detail.
+  description: String
+  image: S3Object # hero image, uploaded like a brand logo
+  # The venue floor plan, and the host's own booth number for the "find us"
+  # callout beside it. Both nullable: an event with no map uploaded simply has no
+  # map section in the passport guide, which is how the section is switched off.
+  mapImage: S3Object
+  hostBoothNumber: String
+  status: TastingEventStatus!
+  publishAt: AWSDateTime # go-live time when SCHEDULED
+  # When the doors open and when they shut. Both nullable and unindexed, so adding
+  # them is additive — existing rows simply carry neither and keep the old
+  # publish-plus-a-day window. `startsAt` gates stamping, not listing: an event is
+  # browsable from its go-live so a roster can be read before the doors open.
+  # `endsAt` is what moves it to Past Events.
+  startsAt: AWSDateTime
+  endsAt: AWSDateTime
+  booths: [TastingBooth] @hasMany(indexName: "byEvent")
+}
+
+type TastingBooth
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: public, operations: [read] } # guest mode; see TastingEvent
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  eventId: ID! @index(name: "byEvent", sortKeyFields: ["order"])
+  event: TastingEvent @belongsTo(fields: ["eventId"])
+  # Link back to the source brand (a `User` record). Null = custom booth.
+  # Plain ref (no @belongsTo) to avoid adding a @hasMany to the hot User type.
+  brandRefId: ID @index(name: "byBrandBooth") # == brand User.id
+  brandSyncedAt: AWSDateTime # set by the CMS "Sync now" action
+  # Snapshot fields: seeded from the brand, then editable in CMS ("excel row").
+  # These are what the APP reads — offline-friendly, no live brand fetch.
+  name: String!
+  logo: S3Object
+  description: String
+  # Home location ("Kentucky, USA"), NOT a position at the venue — it is seeded
+  # from the brand's country and shown on the distiller page.
+  location: String
+  # The stand's number on the printed floor plan, which is what the map's
+  # directory lists. Free text, because plans number stands "12A" as readily as
+  # "12". A booth without one is absent from the directory, not numbered zero.
+  boothNumber: String
+  order: Int
+  pours: [TastingPour] @hasMany(indexName: "byBooth")
+}
+
+type TastingPour
+  @model
+  @auth(
+    rules: [
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+      { allow: public, operations: [read] } # guest mode; see TastingEvent
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  boothId: ID! @index(name: "byBooth", sortKeyFields: ["order"])
+  booth: TastingBooth @belongsTo(fields: ["boothId"])
+  # Catalogue bottle; null = custom bottle hand-added for this event.
+  whiskeyRefId: ID @index(name: "byWhiskeyPour") # == Whiskey.id
+  # Leaderboard identity: whiskeyRefId when linked, else normalize(brand+name).
+  # Computed at curation and editable, so the CMS can force merge/split.
+  bottleKey: ID! @index(name: "byBottleKeyPour")
+  # Snapshot fields (from Whiskey or hand-entered), editable in CMS.
+  name: String!
+  brand: String
+  tag: String
+  proof: Float
+  rating: Float
+  picture: S3Object
+  order: Int
+}
+
+# --- Per-attendee passport state. owner-scoped; never touches User records. ---
+# The app composes a deterministic `id` (e.g. `${ownerSub}:${eventId}:${boothId}`)
+# so optimistic offline writes upsert idempotently and never collide across users.
+
+type TastingBoothState
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [read]
+      }
+    ]
+  ) {
+  id: ID!
+  eventId: ID! @index(name: "byEventBoothState")
+  boothId: ID! @index(name: "byBoothState")
+  want: Boolean
+  went: Boolean # the stamp / "Visited"
+  fav: Boolean
+  notes: String # private, <=2000 chars
+  shareEmail: Boolean # lead-gen opt-in; null = untouched
+}
+
+type TastingPourState
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [read]
+      }
+    ]
+  ) {
+  id: ID!
+  eventId: ID! @index(name: "byEventPourState")
+  boothId: ID! @index(name: "byBoothPourState")
+  pourId: ID! @index(name: "byPourState") # the concrete TastingPour tapped
+  bottleKey: ID! @index(name: "byBottleKeyState") # copied from the pour; leaderboard group key
+  tasted: Boolean
+  fav: Boolean
+}
+
+# --- Per-user, per-event attendance header. The clean "user attended event X"
+# record and the passport-dedicated home for the lead contact snapshot (name +
+# email), captured only with consent — NEVER read from the user's app record.
+# TastingBoothState / TastingPourState hang under it (same owner + eventId).
+# Extensible: future sweepstakes entries, check-in, totals attach here. ---
+
+type TastingAttendance
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, read, update, delete] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [read]
+      }
+    ]
+  ) {
+  id: ID! # `${ownerSub}:${eventId}` — one per user per event
+  eventId: ID! @index(name: "byEventAttendance")
+  displayName: String # snapshot captured with consent
+  email: String # the lead email; cleared to null on opt-out
+  # Event-level sharing switch. Absent/true = sharing (the default); false = the
+  # attendee explicitly opted out, and `displayName`/`email` are nulled with it.
+  # Distinguishes "opted out" from "row not written yet" without re-deriving.
+  shareContact: Boolean
+  joinedAt: AWSDateTime
+  stampCount: Int # denormalized # of booths visited (cheap CMS reporting)
+}
+
+# --- Live leaderboard. Incremented in real time by a DynamoDB stream on
+# TastingPourState. The app reads it and subscribes to onUpdate. ---
+
+type TastingLeaderboardCounter
+  @model
+  @auth(
+    rules: [
+      { allow: private, operations: [read] }
+      {
+        allow: groups
+        groups: ["Admin"]
+        provider: userPools
+        operations: [create, read, update, delete]
+      }
+    ]
+  ) {
+  id: ID! # `${eventId}:${bottleKey}`
+  eventId: ID! @index(name: "byEventLeaderboard")
+  bottleKey: ID!
+  whiskeyRefId: ID # null for custom bottles
+  bottleName: String
+  brand: String
+  count: Int!
+  updatedAt: AWSDateTime
+}
+
+# --- Per-user passport prefs (onboarding dismissal, per-user not per-device).
+# `id` == the user's Cognito sub, one row per user. ---
+
+type TastingUserPref
+  @model
+  @auth(rules: [{ allow: owner, operations: [create, read, update, delete] }]) {
+  id: ID!
+  onboardedAt: AWSDateTime
+}

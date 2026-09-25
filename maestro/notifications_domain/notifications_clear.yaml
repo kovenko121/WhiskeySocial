@@ -1,0 +1,45 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/notifications_clearall'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+
+- runFlow: '../auth_domain/login_apple.yaml'
+- tapOn:
+    id: "notifications"
+- assertVisible: "Notifications"
+- tapOn: "Activity"
+- tapOn: "Discovery"
+- tapOn: "All"
+- assertVisible: "Today"
+- tapOn:
+    point: "14%,28%"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    point: "90%,40%"
+- tapOn:
+    id: "navigation-back"
+- scroll
+- scroll
+- tapOn:
+    point: "76%,75%"
+- swipe:
+    start: "49%,20%"
+    end: "49%,66%"
+    duration: 1450
+- scrollUntilVisible:
+    element: 'Notifications'
+    direction: UP
+
+- runFlow: '../auth_domain/delete_account.yaml'
+
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

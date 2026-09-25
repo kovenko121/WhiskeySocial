@@ -1,0 +1,51 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/ads_domain/ads_see-more'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------Propagandas no WS------------------------
+- tapOn:
+    id: "ads"
+- tapOn:
+    id: "breadcrumb"
+- tapOn:
+    id: "search"
+- scrollUntilVisible:
+    centerElement: true
+    element: "Latest Articles"
+    direction: "DOWN"
+- tapOn:
+    id: "ads"
+- tapOn:
+    id: "breadcrumb"
+- tapOn: "Agua faz bem  Water"
+- scrollUntilVisible:
+    element: "Related Articles"
+    direction: "DOWN"
+- tapOn:
+    id: "ads"
+- tapOn:
+    id: "breadcrumb"
+- scrollUntilVisible:
+    centerElement: true
+    element: "Agua faz bem"
+    direction: "UP"
+    speed: 80
+- swipe:
+    start: "42%,34%"
+    end: "36%,87%"
+    duration: 2010
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "home"
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

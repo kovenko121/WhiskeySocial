@@ -1,0 +1,23 @@
+[
+  {
+    "Action": [
+      "dynamodb:PutItem",
+      "dynamodb:UpdateItem",
+      "dynamodb:GetItem"
+    ],
+    "Effect": "Allow",
+    "Resource": [
+      "arn:aws:dynamodb:*:*:table/2fa-whiskeysocial-*"
+    ]
+  },
+  {
+    "Action": [
+      "ssm:GetParameter",
+      "ssm:GetParameters"
+    ],
+    "Effect": "Allow",
+    "Resource": [
+      "arn:aws:ssm:*:*:parameter/amplify/*/POSTMARK_SERVER_TOKEN"
+    ]
+  }
+]

@@ -1,0 +1,82 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/my_collection_domain/edit_whiskey_my_collection'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------------------------------
+- tapOn:
+    id: "my-collection"
+- swipe:
+    start: "54%,71%"
+    end: "48%,39%"
+    duration: 1386
+- swipe:
+    start: "82%,60%"
+    end: "41%,60%"
+    duration: 1178
+- tapOn: .*10th Mountain Bourbon.*
+- swipe:
+    start: "54%,76%"
+    end: "55%,30%"
+    duration: 1394
+- tapOn:
+    point: "50%,86%" #(- tapOn: .*10th Mountain Bourbon.*)
+- scrollUntilVisible:
+    element: "Bottle Details"
+    direction: "DOWN"
+    centerElement: true
+    speed: 90
+- tapOn: " Edit"
+- tapOn:
+    id: "barrel-#"
+- eraseText: 20
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "barrel-#"
+- eraseText: 50
+- inputText: "Pau Brasil"
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "save"
+- scrollUntilVisible:
+    element: "55d"
+    direction: "DOWN"
+    centerElement: true
+- swipe:
+    start: "50%,12%"
+    end: "48%,84%"
+    duration: 1998
+- swipe:
+    start: "30%,15%"
+    end: "32%,57%"
+    duration: 1026
+- tapOn:
+    id: "navigation-back"
+- swipe:
+    start: "67%,23%"
+    end: "69%,40%"
+    duration: 1162
+- swipe:
+    start: "70%,20%"
+    end: "71%,47%"
+    duration: 842
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "home"
+- swipe:
+    start: "46%,24%"
+    end: "45%,65%"
+    duration: 1530
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

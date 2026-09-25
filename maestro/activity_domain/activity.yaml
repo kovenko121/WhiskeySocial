@@ -1,0 +1,59 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/activity'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- tapOn:
+    id: "reward"
+    #point: "59%,10%"
+- runFlow:
+    when: 
+      visible: "Welcome to WS Rewards!"
+    commands:
+      - tapOn: "Close"    
+
+- runFlow:
+    when: 
+      visible: "WS Rewards"
+    commands:
+      - tapOn:
+          id: "navigation-back"
+- tapOn:
+    id: "notifications"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "settings"
+- tapOn:
+    id: "navigation-back"
+- assertVisible:
+    id: "what-are-you-drinking-today"
+- assertNotVisible:
+    id: "following"
+- assertNotVisible:
+    id: "trending"
+- tapOn:
+    id: "--find-people"
+- tapOn: "Cancel"
+- tapOn: "Ads See more "
+- tapOn:
+    id: "breadcrumb"
+- "scroll"
+- waitForAnimationToEnd:
+    timeout: 800
+- scrollUntilVisible:
+    element: 
+        id: "notifications"
+    direction: "UP"
+    centerElement: true
+- waitForAnimationToEnd:
+    timeout: 2000
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

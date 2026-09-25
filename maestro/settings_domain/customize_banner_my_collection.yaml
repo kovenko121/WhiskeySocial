@@ -1,0 +1,58 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/settings_domain/customize_banner_my_collections'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------inserindo foto no banner------------------------
+- tapOn:
+    id: "my-collection"
+- runFlow:
+    when:
+      visible: "Customize your collection by \n adding a picture of it."
+    commands:
+    - tapOn:
+        id: "options"
+    - tapOn:
+        id: "upload-cover-pic"
+    - swipe:
+        start: "49%,89%"
+        end: "53%,22%"
+        duration: 1301
+    - tapOn: "Photo, 08 August 2012, 15:52"
+    - tapOn: "Choose"
+    - tapOn:
+        id: "navigation-back"
+#--------------trocar foto do banner----------
+- tapOn:
+    id: "my-collection"
+- tapOn:
+    id: "options"
+- tapOn:
+    id: "upload-cover-pic"
+- swipe:
+    start: "47%,96%"
+    end: "42%,16%"
+    duration: 1804
+- swipe:
+    start: "44%,94%"
+    end: "45%,73%"
+    duration: 921
+- tapOn:
+    point: "16%,88%"
+- tapOn: "Choose"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "my-collection"
+- tapOn: ""
+
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

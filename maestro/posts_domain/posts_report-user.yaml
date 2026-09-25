@@ -1,0 +1,63 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/posts_domain/posts_report-user'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------------------------------
+- waitForAnimationToEnd:
+    timeout: 1500
+- runFlow:
+    when:
+      notVisible: "report-post"
+    commands:
+      - scrollUntilVisible:
+          centerElement: true  
+          element: 
+            id: "see-comments"
+            #text: "hoje eu bebi agua"
+          direction: DOWN
+          speed: 99
+      - tapOn: 
+          id: "options"
+      - tapOn: 
+          id: "report-post"
+      - assertVisible: "Report"
+      - tapOn: "Other"
+      - tapOn: "What are you trying to report?"
+      - inputText: "teste para reportar usuário"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "cancel"
+      - tapOn: 
+          id: "options"
+      - tapOn: 
+          id: "report-post"
+      - assertVisible: "Report"
+      - tapOn: "Other"
+      - tapOn: "What are you trying to report?"
+      - inputText: "teste para reportar usuário"
+      - tapOn:
+          id: "Done"
+      - tapOn:
+          id: "continue"
+      - assertVisible: "Report"
+      - assertVisible: "User"
+      - assertVisible: "Category"
+      - assertVisible: "Reason"
+      - tapOn:
+          id: "navigation-back"
+      - tapOn:
+          id: "continue"
+      - tapOn:
+          id: "send-report-and-return"
+#-------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

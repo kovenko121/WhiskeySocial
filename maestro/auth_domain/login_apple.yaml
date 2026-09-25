@@ -1,0 +1,37 @@
+appId: app.teetimetrainer
+env:
+  RECORD_FILE: 'assets/records/auth_domain/login_apple'
+  
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+- assertVisible: "Login or Signup"
+- tapOn:
+    id: "login-with-apple"
+- waitForAnimationToEnd:
+    timeout: 1000
+#- assertVisible: "circle"  # Add this to ensure the element is visible/use the correct identifier
+- tapOn: 'circle'
+- inputText:
+    id: "phone-number-input"  # ID selector for the phone number field
+    text: ${PHONE_NUMBER}
+- tapOn:
+    id: 'SIWA_CONTINUE_BUTTON'
+- waitForAnimationToEnd:
+    timeout: 1000
+- tapOn: 'Password'
+- inputText: ${APPLE_PASSWORD}
+- waitForAnimationToEnd:
+    timeout: 1000
+- tapOn:
+    point: 50%,49%
+- waitForAnimationToEnd:
+    timeout: 4000
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

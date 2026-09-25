@@ -1,0 +1,394 @@
+{
+  "pages": {
+    "login": {
+      "title": "Sign in to your account",
+      "signin": "Sign in",
+      "signup": "Sign up",
+      "divider": "or",
+      "fields": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "errors": {
+        "validEmail": "Invalid email address"
+      },
+      "buttons": {
+        "submit": "Login",
+        "forgotPassword": "Forgot password?",
+        "noAccount": "Don’t have an account?",
+        "rememberMe": "Remember me"
+      }
+    },
+    "forgotPassword": {
+      "title": "Forgot your password?",
+      "fields": {
+        "email": "Email"
+      },
+      "errors": {
+        "validEmail": "Invalid email address"
+      },
+      "buttons": {
+        "submit": "Send reset instructions"
+      }
+    },
+    "register": {
+      "title": "Sign up for your account",
+      "fields": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "errors": {
+        "validEmail": "Invalid email address"
+      },
+      "buttons": {
+        "submit": "Register",
+        "haveAccount": "Have an account?"
+      }
+    },
+    "updatePassword": {
+      "title": "Update password",
+      "fields": {
+        "password": "New Password",
+        "confirmPassword": "Confirm new password"
+      },
+      "errors": {
+        "confirmPasswordNotMatch": "Passwords do not match"
+      },
+      "buttons": {
+        "submit": "Update"
+      }
+    },
+    "error": {
+      "info": "You may have forgotten to add the {{action}} component to {{resource}} resource.",
+      "404": "Sorry, the page you visited does not exist.",
+      "resource404": "Are you sure you have created the {{resource}} resource.",
+      "backHome": "Back Home"
+    }
+  },
+  "actions": {
+    "list": "List",
+    "create": "Create",
+    "edit": "Edit",
+    "show": "Show"
+  },
+  "buttons": {
+    "create": "Create",
+    "save": "Save",
+    "logout": "Logout",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "confirm": "Are you sure?",
+    "filter": "Filter",
+    "clear": "Clear",
+    "refresh": "Refresh",
+    "show": "Show",
+    "undo": "Undo",
+    "import": "Import",
+    "clone": "Clone",
+    "notAccessTitle": "You don't have permission to access"
+  },
+  "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
+  "notifications": {
+    "success": "Successful",
+    "error": "Error (status code: {{statusCode}})",
+    "undoable": "You have {{seconds}} seconds to undo",
+    "createSuccess": "Successfully created {{resource}}",
+    "createError": "There was an error creating {{resource}} (status code: {{statusCode}})",
+    "deleteSuccess": "Successfully deleted {{resource}}",
+    "deleteError": "Error when deleting {{resource}} (status code: {{statusCode}})",
+    "editSuccess": "Successfully edited {{resource}}",
+    "editError": "Error when editing {{resource}} (status code: {{statusCode}})",
+    "importProgress": "Importing: {{processed}}/{{total}}"
+  },
+  "loading": "Loading",
+  "tags": {
+    "clone": "Clone"
+  },
+  "dashboard": {
+    "title": "Dashboard"
+  },
+  "documentTitle": {
+    "default": "refine",
+    "suffix": " | refine",
+    "whiskeys": {
+      "list": "Whiskeys | refine",
+      "show": "#{{id}} Show Whiskey | refine",
+      "edit": "#{{id}} Edit Whiskey | refine",
+      "create": "Create new Whiskey | refine",
+      "clone": "#{{id}} Clone Whiskey | refine"
+    }
+  },
+  "table": {
+    "actions": "Actions"
+  },
+  "whiskey": {
+    "fields": {
+      "id": "Id",
+      "name": "Name",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "brand": "Brand",
+      "description": "Description",
+      "specialistChoice": "Specialist Choice",
+      "starterPick": "Starter Pick",
+      "singleBarrel": "Single Barrel",
+      "barrel": "Barrel",
+      "distillery": "Distillery",
+      "origin": "Origin",
+      "batch": "Batch",
+      "rick": "Rick",
+      "bottle": "Bottle",
+      "storePick": "Store Pick",
+      "type": "Type",
+      "proof": "Proof",
+      "proofType": "Proof Type",
+      "calculatedRating": "Calculated Rating",
+      "age": "Age",
+      "picture": "Picture",
+      "brandPicture": "Brand Picture",
+      "distilleryTastingNotes": "Distillery Tasting Notes"
+    }
+  },
+  "userReward": {
+    "fields": {
+      "redeemed": "Redeemed",
+      "email": "Email",
+      "fullName": "User Name",
+      "address": "Address",
+      "city": "City",
+      "state": "State",
+      "zipcode": "Zipcode",
+      "size": "Size",
+      "model": "Model",
+      "updatedAt": "Updated At",
+      "trackingCode": "Tracking Code",
+      "service": "Service",
+      "reward.photo": "Photo",
+      "reward.title": "Reward Name",
+      "reward.description": "Description"
+    }
+  },
+  "reward": {
+    "fields": {
+      "id": "Id",
+      "title": "Title",
+      "description": "Description",
+      "isAvailable": "Is Available",
+      "conditions": "Conditions",
+      "models": "Models",
+      "photo": "Photo",
+      "sizes": "Sizes",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    }
+  },
+  "adCampaign": {
+    "fields": {
+      "id": "Id",
+      "name": "Name",
+      "owner": "Owner",
+      "isActive": "Is Active",
+      "type": "Where it's shown",
+      "url": "Url",
+      "picture": "Picture",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    }
+  },
+  "events": {
+    "fields": {
+      "id": "Id",
+      "interactions": "Interactions",
+      "impressions": "Impressions",
+      "campaign": "Campaign",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    }
+  },
+  "article": {
+    "fields": {
+      "id": "Id",
+      "title": "Title",
+      "body": "Body",
+      "body[0]": "Paragraph 1",
+      "body[1]": "Paragraph 2",
+      "body[2]": "Paragraph 3",
+      "coverPhoto": "Cover Photo",
+      "photos": "Photos",
+      "photos[0]": "Picture 1",
+      "photos[1]": "Picture 2",
+      "photos[2]": "Picture 3",
+      "subtitle": "Subtitle",
+      "tag": "Tag"
+    }
+  },
+  "suggestion": {
+    "fields": {
+      "id": "Id",
+      "name": "Name",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "brand": "Brand",
+      "barcode": "Barcode",
+      "photo": "Photo",
+      "year": "Year",
+      "userId": "User Id",
+      "submittedBy": "Submitted By"
+    },
+    "submitter": {
+      "loading": "Looking up submitter…",
+      "notRecorded": "Not recorded",
+      "emailUnavailable": "Email unavailable for this user",
+      "profileMissing": "No app profile found for this user",
+      "deleted": "This account has been deleted"
+    }
+  },
+  "report": {
+    "fields": {
+      "id": "Id",
+      "createdAt": "Created At",
+      "description": "Description",
+      "contentType": "Content Type",
+      "reason": "Reason",
+      "reportedUserId": "Reported User Id",
+      "contentId": "Content Id"
+    },
+    "contentDetails": "Reported Content Details",
+    "contentDeleted": "The content has already been deleted"
+  },
+  "post": {
+    "fields": {
+      "author": {
+        "username": "Username"
+      },
+      "authorId": "Author Id",
+      "description": "Description",
+      "photo": "Photo",
+      "title": "Title",
+      "id": "Id"
+    }
+  },
+  "comment": {
+    "fields": {
+      "id": "Id",
+      "author": {
+        "username": "Username"
+      },
+      "authorId": "Author Id",
+      "postId": "Post Id",
+      "text": "Comment content"
+    }
+  },
+  "specialistReview": {
+    "fields": {
+      "description": "Description",
+      "id": "Id",
+      "rating": "Rating",
+      "title": "Title",
+      "whiskeyId": "Whiskey Id",
+      "recommendationTags": "Recommendation Tags",
+      "specialistImage": "Specialist Photo",
+      "specialistName": "Specialist Name",
+      "specialistReview": "Specialist Review"
+    }
+  },
+  "review": {
+    "fields": {
+      "description": "Description",
+      "id": "Id",
+      "rating": "Rating",
+      "title": "Title",
+      "whiskeyId": "Whiskey Id",
+      "recommendationTags": "Recommendation Tags",
+      "user": {
+        "username": "Username"
+      },
+      "whiskey": {
+        "fullName": "Whiskey Full Name"
+      }
+    }
+  },
+  "venue": {
+    "fields": {
+      "id": "Id",
+      "externalId": "External ID",
+      "profilePicture": "Profile Picture",
+      "coverPicture": "Cover Picture",
+      "bio": "Bio",
+      "owner": "Owner",
+      "venueName": "Venue Name",
+      "username": "Username",
+      "venuePhone": "Venue Phone",
+      "toBeRedeemed": "To Be Redeemed",
+      "venueAddressCountry": "Country",
+      "venueAddressState": "State",
+      "venueAddressCity": "City",
+      "venueAddressNumber": "Zipcode",
+      "venueAddressStreet": "Venue Address",
+      "venueCalculatedRating": "Venue Calculated Rating",
+      "venueCheckinsCount": "Venue Checkins Count",
+      "brand": "Parent Brand"
+    }
+  },
+  "CMSUserBrand": {
+    "title": "Brand Owners",
+    "fields": {
+      "id": "Id",
+      "authId": "Auth ID",
+      "email": "Email",
+      "role": "Role",
+      "brandIds": "Brand IDs",
+      "brands": "Assigned Brands",
+      "isActive": "Active Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    }
+  },
+  "venueRequest": {
+    "fields": {
+      "id": "Id",
+      "fullName": "Full Name",
+      "email": "Email",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "status": "Status",
+      "username": "Username",
+      "venuePhone": "Phone",
+      "venueName": "Venue Name",
+      "venueId": "Venue Id",
+      "venueAddressStreet": "Street",
+      "venueAddressState": "State",
+      "venueAddressNumber": "Zipcode",
+      "venueAddressCountry": "Country",
+      "venueAddressCity": "City"
+    }
+  },
+  "featureFlags": {
+    "fields": {
+      "id": "Id",
+      "key": "Key",
+      "value": "Value"
+    }
+  },
+  "clubRequest": {
+    "fields": {
+      "id": "Id",
+      "clubName": "Club Name",
+      "description": "Description",
+      "location": "Location",
+      "currentMemberCount": "Estimated Members",
+      "isPrivate": "Privacy",
+      "requestedBy": "Requested By",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "reviewedBy": "Reviewed By",
+      "reviewedAt": "Reviewed At",
+      "rejectionReason": "Rejection Reason",
+      "createdClubId": "Created Club"
+    }
+  }
+}

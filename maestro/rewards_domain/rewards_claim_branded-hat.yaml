@@ -1,0 +1,93 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/activity_domain/rewards_claim_branded-hat'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+
+#------------------- Rewards Cap-----------------
+- runFlow:
+    when:
+      true: ${ORIGIN == 'notCongratulations'}
+    commands:     
+        - scrollUntilVisible:
+            element:  "Whiskey Social Branded Hat"
+            direction: "RIGHT"
+            speed: 80
+            visibilityPercentage: 100
+        - tapOn:
+            id: "-claim-reward!-whiskey-social-branded-hat"
+- tapOn:
+    id: "fill-shipping-info" 
+- tapOn:
+    id: "full-name"
+- inputText: "Test User"
+- tapOn:
+    id: "e-mail"
+- inputText: "test-user@gmail.com"
+- tapOn:
+    id: "address"
+- inputText: "Rua da Esquina, 1234"
+- hideKeyboard
+- tapOn:
+    id: "address-2"
+- inputText: "Bairro da Lagoa"
+- hideKeyboard
+- tapOn: 
+    id: "city"
+- inputText: "Curitiba"
+- hideKeyboard
+- tapOn:
+    id: "state"
+- inputText: "Paraná"
+- hideKeyboard
+- tapOn:
+    id: "zipcode"
+- inputText: "80205480"
+- tapOn: "Done"
+- waitForAnimationToEnd:
+    timeout: 800      
+- tapOn: "checkbox, not checked"
+- assertVisible: "checkbox, checked"
+- tapOn:
+    id: "continue-to-review"
+- assertVisible: "Review Shipping Info"
+- tapOn: 
+    id: "edit-info"
+- assertVisible: "Shipping Info"
+- tapOn:
+    id: "full-name"
+- longPressOn:
+    id: "full-name"
+- tapOn: 'Select All'
+- tapOn: 'Cut'
+- inputText: "Test User"
+- tapOn:
+    id: "continue-to-review"
+# - tapOn:
+#     id: "confirm-shipping-info"
+# - tapOn:
+#     id: "return-rewards"    
+- tapOn:
+    id: "navigation-back"
+- waitForAnimationToEnd:
+    timeout: 500
+- tapOn:
+    id: "navigation-back"
+- waitForAnimationToEnd:
+    timeout: 500
+# - tapOn:
+#     id: "navigation-back"
+# - waitForAnimationToEnd:
+#     timeout: 500
+# - tapOn:
+#     id: "navigation-back"
+    
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

@@ -1,0 +1,15 @@
+## [Start] ResponseTemplate. **
+#if($ctx.error)
+  $util.error($ctx.error.message, $ctx.error.type)
+#else
+
+  #set($currentDate = $util.time.nowISO8601())
+
+  #foreach($item in $ctx.result.items)
+    #set($isActive = ($currentDate.compareTo($item.startDate) >= 0) && ($currentDate.compareTo($item.endDate) <= 0))
+    $util.qr($item.put("isActive", $isActive))
+  #end
+
+  $util.toJson($ctx.result)
+#end
+## [End] ResponseTemplate. **

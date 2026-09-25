@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "auth": {
+      "whiskeysocial1f41304e": [
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "storage": {
+      "User:@model(appsync)": [
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "token",
+      "environmentVariableName": "TOKEN"
+    }
+  ]
+}

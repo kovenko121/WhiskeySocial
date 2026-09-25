@@ -1,0 +1,69 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/pours_domain/insert_pours'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#--------------inserindo 1 pours-----------------------
+- tapOn:
+    id: "what-are-you-drinking-today"
+- tapOn:
+    id: "whiskey"
+- tapOn:
+    id: "10th-mountain-american-single-malt"
+- inputText: "experimentando este uísque."
+- tapOn:
+    id: "Done"
+- tapOn:
+    id: "share"
+- swipe:
+    start: "55%,69%"
+    end: "55%,44%"
+    duration: 864
+- tapOn:
+    id: "my-collection"
+- tapOn: 
+    id: "pours"
+- tapOn: 
+    id: "10th-street-single-barrel-sinlge-malt"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "1176-straight-bourbon"
+- scrollUntilVisible:
+    element:
+      text: "Reviews"
+    direction: DOWN
+    speed: 80
+- scrollUntilVisible:
+    element:
+      id: "navigation-back"
+    direction: UP
+    speed: 80
+- tapOn:
+    id: "navigation-back"
+- tapOn: "Uniques"
+- tapOn: "All"
+- tapOn: 
+    id: "sort-dropdown"
+- tapOn:
+    id: "search-bottle,-crest,-type,-etc..."
+- inputText: "1176 Straight Bourbon"
+- tapOn:
+    id: "Done"
+- tapOn:
+    point: "86%,16%"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "navigation-back"
+
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

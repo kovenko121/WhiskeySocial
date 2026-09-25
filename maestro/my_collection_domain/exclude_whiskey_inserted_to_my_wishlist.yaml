@@ -1,0 +1,34 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/my_wishlist_domain/exclude_whiskey_inserted_to_my_wishlist'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#------excluindo uisque inserido na coleção por wishlist------------------------------
+- tapOn:
+    id: "my-collection"
+- swipe:
+    start: "49%,66%"
+    end: "54%,33%"
+    duration: 1146
+- tapOn:
+    point: "26%,50%"
+- swipe:
+    start: "59%,78%"
+    end: "61%,34%"
+    duration: 1266
+- tapOn:
+    point: "85%,83%"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "home"
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

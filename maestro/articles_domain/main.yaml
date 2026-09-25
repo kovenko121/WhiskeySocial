@@ -1,0 +1,4 @@
+appId: app.whiskeysocial
+---
+- runFlow: 'articles.yaml'
+

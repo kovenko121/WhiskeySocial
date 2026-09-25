@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "api": {
+      "whiskeysocial": [
+        "Query",
+        "Mutation"
+      ]
+    },
+    "storage": {
+      "User:@model(appsync)": [
+        "read"
+      ],
+      "Conversation:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "ConversationParticipant:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ],
+      "Message:@model(appsync)": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "rateLimitExemptUserIds",
+      "environmentVariableName": "RATE_LIMIT_EXEMPT_USER_IDS"
+    }
+  ]
+}

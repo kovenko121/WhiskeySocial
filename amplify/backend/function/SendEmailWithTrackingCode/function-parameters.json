@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "storage": {
+      "Reward:@model(appsync)": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

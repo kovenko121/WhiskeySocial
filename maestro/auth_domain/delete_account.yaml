@@ -1,0 +1,15 @@
+appId: app.teetimetrainer
+env:
+  RECORD_FILE: 'assets/records/auth_domain/delete_my_account'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording

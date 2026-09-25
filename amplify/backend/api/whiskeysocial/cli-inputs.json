@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "whiskeysocial",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 365,
+      "apiKeyExpirationDate": "2025-07-24T19:53:57.212Z",
+      "keyDescription": ""
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authwhiskeysocial1f41304e"
+      },
+      {
+        "mode": "OPENID_CONNECT",
+        "openIDProviderName": "OpenID Connect",
+        "openIDIssuerURL": "https://cognito-idp.us-east-2.amazonaws.com/us-east-2_Q6jyJTAhl/",
+        "openIDClientID": "3p6kacuc4ousqa7lv4o4caiad",
+        "openIDAuthTTL": "300000",
+        "openIDIatTTL": "300000"
+      }
+    ],
+    "conflictResolution": {}
+  }
+}

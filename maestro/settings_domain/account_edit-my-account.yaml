@@ -1,0 +1,83 @@
+appId: app.whiskeysocial
+env:
+  RECORD_FILE: 'assets/records/settings_domain/account_edit-my-account'
+---
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - startRecording: ${RECORD_FILE}
+#-------------Editando nome no perfil------------------------
+- tapOn:
+    id: "settings"
+- assertVisible: "Settings"
+- tapOn:
+    id: "account"
+- assertVisible: "Account"
+- assertVisible: "Email"
+- assertVisible: "test-user@gmail.com"
+- tapOn:
+    id: "edit-my-info"
+- assertVisible: "Edit Profile"
+- tapOn: ""
+- tapOn: " Upload Picture"
+- tapOn: "Photo, 20 May, 10:22"
+- tapOn: "Cancel"
+- "scroll"
+- "scroll"
+- tapOn: "Photo, 08 August 2012, 18:55"
+- tapOn: "Choose"
+- assertVisible: "First Name"
+- longPressOn:
+    id: "first-name"
+- tapOn:
+    id: "first-name"
+- tapOn: 'Select All'
+- tapOn: 'Cut'
+- inputText: "Test User"
+- assertVisible: "Last Name"
+- longPressOn:
+    id: "last-name"
+- tapOn:
+    id: "last-name"
+- tapOn: 'Select All'
+- tapOn: 'Cut'
+- inputText: "Brito"
+- tapOn:
+    id: 'Done'
+- assertVisible: "Username"
+- assertVisible:
+    id: "username"
+- assertVisible: "Bio"
+- tapOn:
+    id: "bio"
+- eraseText: 200
+- inputText: "testando campo Bio"
+- tapOn:
+    id: 'Done'
+- tapOn:
+    id: "save"
+- tapOn:
+    id: "home"
+- tapOn:
+    id: "settings"
+- tapOn:
+    id: "account"
+- tapOn:
+    id: "edit-my-info"
+- assertVisible: "Edit Profile"
+- assertVisible: "Test User"
+- assertVisible: "Brito"
+- assertVisible: "testando campo Bio"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "navigation-back"
+- tapOn:
+    id: "navigation-back"
+#--------------------------------------
+- runFlow:
+    when:
+      true: ${RECORD_MODE == 'each'}
+    commands:
+      - stopRecording
