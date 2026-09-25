@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "309287142597",
+    "project_id": "whiskey-social-6da89",
+    "storage_bucket": "whiskey-social-6da89.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309287142597:android:ae2ec0f4c8922bbf741cac",
+        "android_client_info": {
+          "package_name": "app.whiskeysocial"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYWjdBhfcltmaX9_8Kund3AQD8bkxZdxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

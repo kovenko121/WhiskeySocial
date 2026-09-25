@@ -1,0 +1,19 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "jsx": "react-native",
+    "paths": {
+      "@components": ["./src/components/index.ts"],
+      "@services": ["./src/services/index.ts"],
+      "@types": ["./src/types/index.ts"],
+      "@theme": ["./src/styles/theme.ts"],
+      "@helpers": ["./src/helpers/index.ts"],
+      "@contexts": ["./src/contexts/index.ts"],
+      "@hooks": ["./src/hooks/index.ts"],
+    },
+    "strict": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+  },
+  "exclude": ["cms", "**/node_modules"]
+}

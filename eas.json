@@ -1,0 +1,105 @@
+{
+  "cli": {
+    "version": ">= 5.2.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "channel": "staging",
+      "distribution": "internal",
+      "autoIncrement": true,
+      "ios": {
+        "image": "latest",
+        "simulator": false
+      },
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_APP_ENV": "development",
+        "EXPO_PUBLIC_POSTHOG_API_KEY": "phc_RZUSQ8DUqrwlZIvjE7po5Ci35xonswG6qRKBgVj3fhU",
+        "EXPO_PUBLIC_CUSTOMERIO_SITE_ID": "2e489916b42d6ae782ad",
+        "EXPO_PUBLIC_CUSTOMERIO_CDP_API_KEY": "11cebbdcc2e7313aad81"
+      }
+    },
+    "preview": {
+      "channel": "preview",
+      "autoIncrement": true,
+      "ios": {
+        "image": "latest",
+        "distribution": "store"
+      },
+      "android": {
+        "buildType": "apk",
+        "distribution": "internal"
+      },
+      "env": {
+        "EXPO_PUBLIC_APP_ENV": "preview",
+        "EXPO_PUBLIC_POSTHOG_API_KEY": "phc_RZUSQ8DUqrwlZIvjE7po5Ci35xonswG6qRKBgVj3fhU",
+        "EXPO_PUBLIC_CUSTOMERIO_SITE_ID": "2e489916b42d6ae782ad",
+        "EXPO_PUBLIC_CUSTOMERIO_CDP_API_KEY": "11cebbdcc2e7313aad81",
+        "SENTRY_DISABLE_AUTO_UPLOAD": "true"
+      }
+    },
+    "staging": {
+      "channel": "staging",
+      "autoIncrement": true,
+      "ios": {
+        "image": "latest"
+      },
+      "env": {
+        "EXPO_PUBLIC_APP_ENV": "staging",
+        "EXPO_PUBLIC_POSTHOG_API_KEY": "phc_RZUSQ8DUqrwlZIvjE7po5Ci35xonswG6qRKBgVj3fhU",
+        "EXPO_PUBLIC_CUSTOMERIO_SITE_ID": "2e489916b42d6ae782ad",
+        "EXPO_PUBLIC_CUSTOMERIO_CDP_API_KEY": "11cebbdcc2e7313aad81"
+      }
+    },
+    "production": {
+      "channel": "production",
+      "autoIncrement": true,
+      "ios": {
+        "image": "latest"
+      },
+      "env": {
+        "EXPO_PUBLIC_APP_ENV": "production",
+        "EXPO_PUBLIC_POSTHOG_API_KEY": "phc_RZUSQ8DUqrwlZIvjE7po5Ci35xonswG6qRKBgVj3fhU",
+        "EXPO_PUBLIC_CUSTOMERIO_SITE_ID": "2e489916b42d6ae782ad",
+        "EXPO_PUBLIC_CUSTOMERIO_CDP_API_KEY": "11cebbdcc2e7313aad81",
+        "SENTRY_DISABLE_AUTO_UPLOAD": "true"
+      }
+    }
+  },
+  "submit": {
+    "development": {
+      "ios": {
+        "appleId": "larrymovius911@outlook.com",
+        "ascAppId": "6473649063",
+        "appleTeamId": "H2US6N3N76"
+      }
+    },
+    "staging": {
+      "ios": {
+        "appleId": "larrymovius911@outlook.com",
+        "ascAppId": "6473649063",
+        "appleTeamId": "H2US6N3N76"
+      }
+    },
+    "preview": {
+      "ios": {
+        "appleId": "larrymovius911@outlook.com",
+        "ascAppId": "6473649063",
+        "appleTeamId": "H2US6N3N76"
+      }
+    },
+    "production": {
+      "ios": {
+        "appleId": "larrymovius911@outlook.com",
+        "ascAppId": "6473649063",
+        "appleTeamId": "H2US6N3N76"
+      },
+      "android": {
+        "track": "production"
+      }
+    }
+  }
+}
